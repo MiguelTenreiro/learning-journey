@@ -1,11 +1,4 @@
-# My Programming Journey
-
-## Day 1
-- Installed Git
-- Configured VS Code
-- Created my first GitHub repository
-- Cloned repository to local machine
-
+# Responsive Web Design
 
 
 # What Role Does HTML Play on the Web?
@@ -285,14 +278,28 @@ A **favicon** (short for *favorite icon*) is the small icon shown in the browser
 ```html
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Title</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Hello, World!</h1>
+  </header>
+
+  <main>
+    <p>Start your content here.</p>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Your Name</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
 </html>
 ```
 
