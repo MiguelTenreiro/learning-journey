@@ -732,3 +732,275 @@ This follows the **separation of concerns** design principle — splitting a pro
 ```
 
 > Placing `<script>` at the **end of `<body>`** ensures the HTML content loads before the JavaScript runs.
+
+
+# Meta Description and SEO
+
+## What is SEO
+
+- Stands for **Search Engine Optimization**
+- A practice that optimises web pages to rank higher and appear more often in search results
+
+---
+
+## The meta description
+
+A short description of the page, set inside the `<head>` using the `<meta>` element:
+
+```html
+<meta
+  name="description"
+  content="Discover expert tips and techniques for gardening in small spaces, choosing the right plants, and maintaining a thriving garden."
+/>
+```
+
+| Attribute | Purpose |
+|---|---|
+| `name="description"` | Tells browsers, search engines, and web tools this is a page description |
+| `content` | The actual description text |
+
+---
+
+## Best practices
+
+- Keep descriptions **short and concise** — search engines truncate long ones
+- Write for the **user**, not just the algorithm — it should clearly summarise the page
+- Every page should have a **unique** description
+
+---
+
+## Where does it appear
+
+The meta description is **not visible on the page itself**. It appears in **search engine results page (SERP) snippets**, just below the site link:
+
+```
+r/FreeCodeCamp
+This is the official subreddit for the freeCodeCamp.org community. Learn to
+code for free together with millions of other people...
+```
+
+```
+freeCodeCamp — GitHub
+Our full-stack web development and machine learning curriculum is completely free and
+self-paced. We have thousands of interactive coding challenges...
+```
+
+---
+
+## Does it directly affect ranking
+
+- **No** — meta descriptions do not directly affect a site's position in search results
+- **But** — a well-written description can increase **click-through rates**, which drives more traffic to your site
+
+---
+
+## Full example in context
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="Learn HTML, CSS and JavaScript for free with thousands of interactive coding challenges."
+  />
+  <title>freeCodeCamp</title>
+</head>
+```
+
+# Open Graph (OG) Tags and SEO
+
+## What is the Open Graph protocol
+
+- Enables you to **control how your content appears on social media** (Facebook, LinkedIn, etc.)
+- Set through `<meta>` elements inside the `<head>` section
+- Well-crafted OG tags lead to higher **click-through rates**, signalling to search engines that your content is relevant
+
+---
+
+## The 4 essential OG properties
+
+### `og:title` — the title shown on social media
+```html
+<meta property="og:title" content="freeCodeCamp.org" />
+```
+
+---
+
+### `og:type` — the type of content being shared
+Common values: `website`, `article`, `video`, `music`
+
+```html
+<meta property="og:type" content="website" />
+```
+
+---
+
+### `og:image` — the preview image shown in the share card
+- Use **high quality** images with good dimensions and ratios
+- Facebook recommends at least **1200×630px** for high resolution devices, minimum **600×315px**
+
+```html
+<meta
+  property="og:image"
+  content="https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png"
+/>
+```
+
+---
+
+### `og:url` — the canonical URL of the page
+```html
+<meta property="og:url" content="https://www.freecodecamp.org" />
+```
+
+---
+
+## Other available OG properties
+
+| Property | Purpose |
+|---|---|
+| `og:description` | Short description of the page |
+| `og:audio` | URL to an audio file |
+| `og:video` | URL to a video file |
+| `og:locale` | Language and region (e.g. `en_US`) |
+
+---
+
+## Full example in context
+
+```html
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>freeCodeCamp</title>
+
+  <meta property="og:title" content="freeCodeCamp.org" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.freecodecamp.org" />
+  <meta
+    property="og:image"
+    content="https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png"
+  />
+  <meta
+    property="og:description"
+    content="Learn to code for free with millions of other people."
+  />
+</head>
+```
+
+---
+
+## How OG tags affect SEO
+
+- Do **not** directly affect search engine ranking
+- Improve the **visual appearance** of shared links in social media feeds
+- Higher engagement and click-through rates **signal relevance** to search engines, indirectly boosting SEO
+
+
+
+# HTML Audio and Video Elements
+
+## Supported formats
+
+| Element | Supported formats |
+|---|---|
+| `<audio>` | `mp3`, `wav`, `ogg` |
+| `<video>` | `mp4`, `ogg`, `webm` |
+
+---
+
+## The `<audio>` element
+
+### Basic usage
+Without any attributes, nothing is visible on the page:
+
+```html
+<audio src="audio.mp3"></audio>
+```
+
+### With `controls` (recommended)
+Displays the built-in playback controls (play, pause, volume):
+
+```html
+<audio src="audio.mp3" controls></audio>
+```
+
+> Note: Some browsers (e.g. Safari) may not display a volume control by default.
+
+---
+
+## Audio attributes
+
+| Attribute | Type | Purpose |
+|---|---|---|
+| `src` | — | Location of the audio file |
+| `controls` | boolean | Shows built-in playback controls |
+| `loop` | boolean | Replays audio continuously |
+| `muted` | boolean | Starts audio in a muted state |
+
+### Full example
+
+```html
+<audio src="audio.mp3" controls loop muted></audio>
+```
+
+---
+
+## Multiple source formats
+
+Different browsers support different formats. Use `<source>` elements inside `<audio>` — the browser picks the first one it can play:
+
+```html
+<audio controls>
+  <source src="audio.ogg" type="audio/ogg" />
+  <source src="audio.wav" type="audio/wav" />
+  <source src="audio.mp3" type="audio/mpeg" />
+</audio>
+```
+
+---
+
+## The `<video>` element
+
+Supports all the same attributes as `<audio>`, plus two extras:
+
+| Attribute | Type | Purpose |
+|---|---|---|
+| `src` | — | Location of the video file |
+| `controls` | boolean | Shows built-in playback controls |
+| `loop` | boolean | Replays video continuously |
+| `muted` | boolean | Starts video muted |
+| `autoplay` | boolean | Plays video automatically on load |
+| `width` | — | Sets the width of the video player |
+| `poster` | — | Image displayed while the video is loading (video only) |
+
+### Full example
+
+```html
+<video
+  src="video.mp4"
+  controls
+  loop
+  muted
+  autoplay
+  poster="thumbnail.jpg"
+  width="400"
+></video>
+```
+
+---
+
+## Multiple source formats for video
+
+Same approach as audio — browser picks the first compatible format:
+
+```html
+<video controls width="400" poster="thumbnail.jpg">
+  <source src="video.mp4" type="video/mp4" />
+  <source src="video.webm" type="video/webm" />
+  Your browser does not support the video tag.
+</video>
+```
+
+> The fallback text (`Your browser does not support the video tag.`) is displayed only if the browser cannot play any of the provided formats.
