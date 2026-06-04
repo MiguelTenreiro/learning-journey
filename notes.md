@@ -1004,3 +1004,1052 @@ Same approach as audio — browser picks the first compatible format:
 ```
 
 > The fallback text (`Your browser does not support the video tag.`) is displayed only if the browser cannot play any of the provided formats.
+
+
+# Optimizing Media Assets
+
+## The 3 things to consider
+
+| Factor | Goal |
+|---|---|
+| **Size** | Match image dimensions to how they are displayed |
+| **Format** | Use modern, optimised file formats |
+| **Compression** | Reduce file size with compression algorithms |
+
+---
+
+## 1. Size
+
+- Always **scale images to the size they will be displayed** — no larger
+- Serving a 1920×1080 image styled at 640×480 forces users to download unnecessary data
+- Smaller resolution = smaller file size = faster load times
+
+```
+Display size:  640×480 px  ✅ serve at 640×480
+Actual image: 1920×1080 px ⚠️ wasteful — users download 6× more data than needed
+```
+
+---
+
+## 2. Format
+
+| Format | Notes |
+|---|---|
+| `PNG` | Common but not ideal — large file sizes |
+| `JPG` | Common but not ideal — lossy compression |
+| `WEBP` | Modern, optimised — preferred over PNG/JPG |
+| `AVIF` | Modern, highly optimised — best for most use cases |
+
+> Unless you need to support older browsers, prefer **WEBP** or **AVIF**.
+
+---
+
+## 3. Compression
+
+### Lossless compression
+- Original data can be **perfectly reconstructed** after compression
+- No quality loss
+- Example format: `PNG`
+- Example tool: `pngcrush`
+
+```
+PNG → pngcrush → smaller PNG, identical quality ✅
+```
+
+### Lossy compression
+- Some image data is **permanently discarded** on each save or re-compression
+- Results in degraded quality over time
+- Example format: `JPG`
+
+```
+JPG → re-save → JPG with slightly lower quality ⚠️
+JPG → re-save again → JPG with even lower quality ⚠️⚠️
+```
+
+---
+
+## Quick checklist
+
+- [ ] Image dimensions match the display size
+- [ ] Using WEBP or AVIF instead of PNG/JPG where possible
+- [ ] Compression applied to reduce file size
+- [ ] Avoided re-saving lossy formats (JPG) multiple times
+
+
+
+# Image Licenses
+
+## Why licenses matter
+
+- Images are **intellectual property** protected by copyright
+- Copyright belongs to the creator (or publisher) by default
+- Using an image without permission can have legal consequences
+
+---
+
+## The 3 ways to legally use a copyrighted image
+
+1. Obtain **written permission** from the copyright holder
+2. **Purchase a license** from the copyright holder
+3. Use it under **fair use**
+
+### Fair use
+Use must be both **limited** and **transformative**:
+
+```
+✅ Commenting on or reviewing the image
+✅ Creating a parody of the image
+⚠️ Simply displaying it on your site does not qualify
+```
+
+---
+
+## Types of image licenses
+
+### All rights reserved (default)
+- The creator holds **all copyright**
+- Cannot be used without permission or purchase
+
+### Permissive licenses
+- Images are available for use, but **rules apply** — always read the license
+- Examples: **Creative Commons**, **BSD**
+- Restrictions may include:
+  - Making your website open source
+  - Not modifying the image
+
+### Public domain
+- **No copyright** — free to use without any restrictions
+- Images released under **Creative Commons 0 (CC0)** are considered public domain
+
+---
+
+## License types — quick reference
+
+| License type | Can use freely | Modifications allowed | Restrictions |
+|---|---|---|---|
+| All rights reserved | No | No | Permission or purchase required |
+| Permissive (e.g. CC) | Yes | Depends on license | Read the license |
+| Public domain / CC0 | Yes | Yes | None |
+
+---
+
+## Where to find free-to-use images
+
+- **Pixabay** — free images, mostly CC0
+- **Unsplash** — free high-quality images
+- **Search engines** — filter results by license type
+
+> Always verify the license of any image before using it on your website.
+
+
+# SVGs — Scalable Vector Graphics
+
+## Raster vs Vector images
+
+| | Raster (PNG, JPG) | Vector (SVG) |
+|---|---|---|
+| **Based on** | Pixels | Paths and equations |
+| **Scales well** | No — becomes pixelated | Yes — perfect at any size |
+| **File editable as code** | No | Yes — stored in XML |
+| **Colour changeable programmatically** | No | Yes |
+
+---
+
+## What is an SVG
+
+- Stands for **Scalable Vector Graphic**
+- Tracks data as **paths, points, lines, and curves** — not pixels
+- Scales to **any size without quality loss**
+- Stored in **XML** — can be used directly in HTML and edited with code
+
+---
+
+## SVG directly in HTML
+
+```html
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="50" cy="50" r="45" stroke="black" stroke-width="4" fill="yellow" />
+  <circle cx="35" cy="40" r="5" fill="black" />
+  <circle cx="65" cy="40" r="5" fill="black" />
+  <path d="M35 65 Q50 80 65 65" stroke="black" stroke-width="4" fill="transparent" />
+</svg>
+```
+
+### Key SVG elements
+
+| Element | Purpose |
+|---|---|
+| `<svg>` | Container for the whole drawing — sets up the drawing area |
+| `<circle>` | Draws a circle — used for faces, eyes, dots, etc. |
+| `<path>` | Draws lines and curves — used for complex shapes like smiles or icons |
+
+### Common attributes
+
+| Attribute | Purpose |
+|---|---|
+| `width` / `height` | Dimensions of the SVG canvas |
+| `viewBox` | Defines the coordinate system for the drawing |
+| `fill` | Fill colour of the shape |
+| `stroke` | Border/outline colour |
+| `stroke-width` | Thickness of the outline |
+| `cx` / `cy` | Centre point of a circle |
+| `r` | Radius of a circle |
+
+---
+
+## SVG icon examples
+
+```html
+<!-- Star -->
+<svg width="50" height="50" viewBox="0 0 24 24" fill="gold" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 2L14.9 8.6L22 9.3L17 14.1L18.3 21.2L12 17.8L5.7 21.2L7 14.1L2 9.3L9.1 8.6L12 2Z"/>
+</svg>
+
+<!-- Heart -->
+<svg width="50" height="50" viewBox="0 0 24 24" fill="crimson" xmlns="http://www.w3.org/2000/svg">
+  <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 6 4 4 6.5 4C8 4 9.5 4.8 10.5 6.09C11.5 4.8 13 4 14.5 4C17 4 19 6 19 8.5C19 12.28 15.6 15.36 10.45 20.04L12 21.35Z"/>
+</svg>
+
+<!-- Checkmark -->
+<svg width="50" height="50" viewBox="0 0 24 24" fill="green" xmlns="http://www.w3.org/2000/svg">
+  <path d="M20.29 5.71L9 17L3.71 11.71L5.12 10.29L9 14.17L18.88 4.29L20.29 5.71Z"/>
+</svg>
+```
+
+> To change the colour of any SVG, update the `fill` attribute to any named colour: `red`, `blue`, `green`, etc.
+
+---
+
+## When to use SVGs
+
+- **Icons** — custom bullet points, social media icons, UI icons (e.g. Font Awesome uses SVG)
+- **Logos** — scale perfectly at any viewport size
+- **Responsive layouts** — adapt to any screen size without quality loss
+
+> Tip: open any `.svg` file in a text editor — you can edit the code directly to change colours, shapes, and sizes.
+
+
+# Replaced Elements in HTML
+
+## What is a replaced element
+
+- An element whose **content is determined by an external resource**, not by CSS
+- CSS can control **position and layout** of the element
+- CSS **cannot modify the content** inside the element
+
+---
+
+## Common replaced elements
+
+| Element | What it embeds |
+|---|---|
+| `<img>` | An external image file |
+| `<iframe>` | An external website, video, or map |
+| `<video>` | An external video file |
+| `<embed>` | An external resource (e.g. PDF, Flash) |
+
+---
+
+## `<img>` — image element
+
+CSS can position or filter the image, but cannot modify the image itself:
+
+```html
+<img src="example-img-url" alt="Descriptive text goes here" />
+```
+
+---
+
+## `<iframe>` — inline frame element
+
+Embeds an external site, video, or map. CSS can reposition the frame, but cannot style the content inside it.
+
+> If the embedded site has an `<h1>`, your CSS cannot change its size, font, or colour.
+
+### Embedding a YouTube video
+
+```html
+<iframe
+  width="400"
+  height="200"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="Video title"
+  allowfullscreen
+></iframe>
+```
+
+### Embedding a map
+
+```html
+<iframe
+  title="Map of Greenwich, London"
+  width="300"
+  height="200"
+  src="https://www.openstreetmap.org/export/embed.html?bbox=..."
+></iframe>
+```
+
+---
+
+## Conditionally replaced elements
+
+Some elements behave as replaced elements only under **specific circumstances**:
+
+```html
+<!-- ✅ replaced element — embeds an image as a clickable input -->
+<input type="image" src="example-img-url" alt="Descriptive text" />
+
+<!-- ⚠️ not a replaced element — content is generated by the browser -->
+<input type="text" />
+<input type="email" />
+```
+
+---
+
+## What CSS can and cannot do with replaced elements
+
+| | CSS can | CSS cannot |
+|---|---|---|
+| `<img>` | Position, resize, apply filters | Modify the image itself |
+| `<iframe>` | Position, resize | Style content inside the frame |
+| `<video>` | Position, resize | Modify the video content |
+
+
+
+# Embedding Videos and Content with `<iframe>`
+
+## What is `<iframe>`
+
+- Stands for **inline frame**
+- An inline element used to **embed external HTML content** directly in a page
+- Can embed: videos, maps, other web pages, or raw HTML
+
+---
+
+## Key attributes
+
+| Attribute | Purpose |
+|---|---|
+| `src` | URL of the page or content to embed |
+| `srcdoc` | Embed raw HTML directly (instead of a URL) |
+| `width` | Width of the iframe in pixels |
+| `height` | Height of the iframe in pixels |
+| `title` | Describes the iframe content — important for accessibility |
+| `allowfullscreen` | Boolean — allows the user to go fullscreen |
+| `allow` | Defines an allowlist of features the iframe can use |
+| `referrerpolicy` | Controls how much referrer info is sent with requests |
+
+---
+
+## Embedding a YouTube video
+
+```html
+<iframe
+  width="400"
+  height="400"
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  title="Learn JavaScript - Full Course for Beginners (YouTube video)"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+```
+
+> Videos can come from any source — not just YouTube or Vimeo.
+
+---
+
+## The `allow` attribute (allowlist)
+
+Defines what the embedded page is permitted to do. Items are separated by semicolons or spaces.
+
+```html
+allow="accelerometer; autoplay; clipboard-write; encrypted-media"
+```
+
+| Value | Permits |
+|---|---|
+| `autoplay` | Automatically play media |
+| `clipboard-write` | Write items to the user's clipboard |
+| `fullscreen` | Enter fullscreen mode |
+| `accelerometer` | Access device motion sensors |
+
+---
+
+## Embedding a map
+
+```html
+<iframe
+  width="425"
+  height="350"
+  src="https://www.openstreetmap.org/export/embed.html?bbox=..."
+  title="Map of Lagos area, Nigeria"
+  style="border: 1px solid black"
+></iframe>
+
+<br />
+<small>
+  <a href="https://www.openstreetmap.org/#map=11/6.4501/3.3210">View Larger Map</a>
+</small>
+```
+
+---
+
+## Embedding raw HTML with `srcdoc`
+
+Use `srcdoc` instead of `src` to embed HTML directly:
+
+```html
+<iframe srcdoc="<p>Hello from inside the iframe!</p>" title="Embedded HTML"></iframe>
+```
+
+---
+
+## Best practices
+
+- Always include a `title` attribute — required for **accessibility**
+- Use `allowfullscreen` for video embeds
+- Keep the `allow` allowlist as **minimal as needed**
+- Prefer `srcdoc` over `src` when embedding raw HTML
+
+
+# The `target` Attribute in HTML
+
+## What is the `target` attribute
+
+- Used on `<a>` (anchor) elements
+- Tells the browser **where to open the linked URL**
+- Every value is preceded by an **underscore**
+
+```html
+<a href="https://freecodecamp.org" target="_blank">Visit freeCodeCamp</a>
+```
+
+---
+
+## The 4 main values
+
+| Value | Behaviour |
+|---|---|
+| `_self` | Opens in the **current tab/window** (default) |
+| `_blank` | Opens in a **new tab** (or new window, depending on browser settings) |
+| `_parent` | Opens in the **parent browsing context** (e.g. the page containing an iframe) |
+| `_top` | Opens in the **top-most browsing context** — always the full browser tab/window |
+
+---
+
+## Examples
+
+```html
+<!-- default behaviour — opens in the same tab -->
+<a href="/about" target="_self">About</a>
+
+<!-- opens in a new tab -->
+<a href="https://freecodecamp.org" target="_blank">Visit freeCodeCamp</a>
+
+<!-- inside an iframe — opens in the parent page's tab -->
+<a href="https://example.com" target="_parent">Open in parent</a>
+
+<!-- inside nested iframes — always opens in the full browser tab -->
+<a href="https://example.com" target="_top">Break out of all frames</a>
+```
+
+---
+
+## `_parent` vs `_top`
+
+Both are relevant when working with **embedded iframes**:
+
+| Value | Opens in |
+|---|---|
+| `_parent` | The immediate parent of the current frame |
+| `_top` | The outermost browser tab/window — ignores all nesting |
+
+```
+Page (tab)
+└── iframe
+    └── nested iframe
+          └── <a target="_parent"> → opens in outer iframe
+          └── <a target="_top">   → opens in the page tab
+```
+
+---
+
+## Experimental: `_unfencedTop`
+
+- Used for the experimental **FencedFrame API**
+- Not yet relevant for general web development
+
+---
+
+## Best practice
+
+Choosing the right `target` value is important for **controlling user navigation** — especially when your page contains embedded frames or links to external sites.
+
+
+# Absolute vs Relative Paths
+
+## What is a path
+
+- A string that specifies the **location of a file or directory** in a file system
+- Used to link to images, stylesheets, scripts, and other pages
+
+---
+
+## Absolute path
+
+A **complete location** of a file, starting from the root directory down to the filename:
+
+```html
+<a href="/Users/user/Desktop/fCC/pages/about.html">About Page</a>
+```
+
+```
+root → Users → user → Desktop → fCC → pages → about.html
+```
+
+---
+
+## Absolute URL
+
+A **complete web address** including protocol and domain name:
+
+```html
+<a href="https://design-style-guide.freecodecamp.org/img/fcc_secondary_small.svg">
+  View fCC Logo
+</a>
+```
+
+| Part | Example |
+|---|---|
+| Protocol | `https` |
+| Domain | `design-style-guide.freecodecamp.org` |
+| Filename | `fcc_secondary_small.svg` |
+
+### How it looks in the browser address bar
+
+```
+file:///Users/user/Desktop/fCC/pages/about.html
+         └── protocol  └── path           └── filename + extension
+```
+
+---
+
+## Relative path
+
+Specifies the location of a file **relative to the current file's directory**. No protocol or domain needed:
+
+```html
+<!-- about.html and contact.html are in the same folder -->
+<a href="about.html">About Page</a>
+```
+
+### Common relative path patterns
+
+```html
+<!-- same folder -->
+<a href="about.html">About</a>
+
+<!-- subfolder -->
+<a href="pages/about.html">About</a>
+
+<!-- one folder up -->
+<a href="../about.html">About</a>
+
+<!-- from root of the site -->
+<a href="/pages/about.html">About</a>
+```
+
+---
+
+## Absolute path vs Absolute URL vs Relative path
+
+| | Absolute path | Absolute URL | Relative path |
+|---|---|---|---|
+| **Includes protocol** | No (local) | Yes (`https`, `http`, `file`) | No |
+| **Includes domain** | No | Yes | No |
+| **Best used for** | Local machine resources | External websites | Internal links within the same site |
+
+---
+
+## When to use each
+
+- **Absolute path** — referencing a resource from a fixed location or root directory
+- **Absolute URL** — linking to a resource on an **external website**
+- **Relative path** — linking to resources **within the same website**
+- **Relative path** — keeping code **cleaner and easier to maintain**
+- **Relative path** — **local testing** without an internet connection
+
+
+# Path Syntax — Slashes, Single Dot, and Double Dot
+
+## The 3 key syntaxes
+
+| Syntax | Name | Meaning |
+|---|---|---|
+| `/` or `\` | Path separator | Separates folder and file names in a path |
+| `.` | Single dot | The **current** directory |
+| `..` | Double dot | The **parent** directory (one level up) |
+
+> The slash used depends on the OS — `/` on Mac/Linux, `\` on Windows.
+
+---
+
+## The slash `/` — path separator
+
+Tells the computer where one folder or file name ends and the next begins:
+
+```
+naomis-files/         → a directory called "naomis-files"
+naomis/files/         → a directory called "files" inside "naomis"
+```
+
+---
+
+## Single dot `.` — current directory
+
+Points to the folder the current file is in. Commonly used to make clear a path is **relative**:
+
+```html
+<script src="./script.js"></script>
+<img src="./logo.png" />
+```
+
+---
+
+## Double dot `..` — parent directory
+
+Moves **one level up** in the directory tree. Used to access files outside the current folder:
+
+```html
+<link rel="stylesheet" href="../styles.css" />
+```
+
+---
+
+## Practical example
+
+Given this file structure:
+
+```
+my-app/
+├─ public/
+│  ├─ favicon.ico
+│  └─ index.html   ← you are here
+└─ src/
+   ├─ index.css
+   └─ index.js
+```
+
+| Goal | Path | Explanation |
+|---|---|---|
+| Load `favicon.ico` (same folder) | `./favicon.ico` | `.` = current folder (`public/`) |
+| Load `index.css` (different folder) | `../src/index.css` | `..` = go up to `my-app/`, then into `src/` |
+
+```html
+<!-- favicon — same directory -->
+<link rel="icon" href="./favicon.ico" />
+
+<!-- stylesheet — parent directory, then into src/ -->
+<link rel="stylesheet" href="../src/index.css" />
+```
+
+---
+
+## Quick reference
+
+```
+./file.txt         → file in the current folder
+../file.txt        → file one level up
+../../file.txt     → file two levels up
+../other/file.txt  → up one level, then into "other" folder
+```
+
+
+
+# Link States in HTML & CSS
+
+## What are link states
+
+- Links can be in **5 different states** depending on user interaction
+- Each state can be styled differently with CSS using **pseudo-classes**
+- They give users visual feedback about links they have or haven't visited
+
+---
+
+## The 5 link states
+
+| State | Pseudo-class | When it applies | Default browser style |
+|---|---|---|---|
+| Default | `:link` | Link not yet visited or interacted with | Blue |
+| Visited | `:visited` | User has already visited the linked page | Purple |
+| Hover | `:hover` | Cursor is hovering over the link | — |
+| Focus | `:focus` | Link is focused (e.g. via `Tab` key) | — |
+| Active | `:active` | Link is being clicked | — |
+
+---
+
+## CSS examples for each state
+
+```css
+/* not yet visited */
+a:link {
+  color: blue;
+}
+
+/* already visited */
+a:visited {
+  color: brown;
+}
+
+/* cursor hovering over the link */
+a:hover {
+  color: red;
+}
+
+/* focused via keyboard (Tab key) */
+a:focus {
+  color: green;
+}
+
+/* being clicked */
+a:active {
+  color: black;
+}
+```
+
+---
+
+## ⚠️ Required order in CSS
+
+Link states must be written in this exact order to work correctly:
+
+```
+1. :link
+2. :visited
+3. :hover
+4. :focus
+5. :active
+```
+
+> Mnemonic: **L**o**V**e **H**ates **F**ear and **A**nger — **L**ink, **V**isited, **H**over, **F**ocus, **A**ctive
+
+---
+
+## Why link states matter
+
+- `:visited` — helps users know which pages they have already read
+- `:hover` — confirms the element is clickable before the user commits to clicking
+- `:focus` — essential for **keyboard navigation** and accessibility
+- `:active` — gives immediate feedback that a click has been registered
+
+
+# Basic HTML Review
+
+## HTML Basics
+
+### What is HTML
+- Represents the **content and structure** of a web page
+
+### Elements
+- Building blocks of an HTML document — headings, paragraphs, links, images, etc.
+- Most elements have an **opening** and **closing** tag
+
+```html
+<elementName>Content goes here</elementName>
+```
+
+### Void elements
+- No closing tag, no content — start tag only
+- Both forms are acceptable:
+
+```html
+<img>
+<img />
+```
+
+### Attributes
+- Values placed inside the opening tag to provide extra information or behaviour
+
+```html
+<element attribute="value"></element>
+```
+
+- **Boolean attributes** — presence = true, absence = false (e.g. `disabled`, `readonly`, `required`)
+
+### Comments
+
+```html
+<!-- This is an HTML comment -->
+```
+
+---
+
+## Common HTML Elements
+
+| Element | Purpose |
+|---|---|
+| `<h1>`–`<h6>` | Headings — `h1` is most important, `h6` least |
+| `<p>` | Paragraph |
+| `<img src="" alt="">` | Image — `src` required, `alt` recommended |
+| `<body>` | Represents the visible content of the page |
+| `<section>` | Divides content into thematic sections (semantic) |
+| `<div>` | Generic container — no semantic meaning |
+| `<a href="">` | Anchor/link — `href` sets the destination |
+| `<ul>` / `<ol>` | Unordered / ordered list |
+| `<li>` | List item (used inside `ul` or `ol`) |
+| `<em>` | Emphasis |
+| `<strong>` | Strong importance / urgency |
+| `<figure>` | Groups images or diagrams |
+| `<figcaption>` | Caption for content inside `<figure>` |
+| `<main>` | Main content of the page |
+| `<footer>` | Bottom of the page — copyright, links |
+
+```html
+<!-- lists -->
+<ul><li>Item</li></ul>
+<ol><li>Item</li></ol>
+
+<!-- figure -->
+<figure>
+  <img src="cats.jpg" alt="Two cats sleeping." />
+  <figcaption>Cats hate other cats.</figcaption>
+</figure>
+
+<!-- footer -->
+<footer>
+  <p>No Copyright - <a href="https://www.freecodecamp.org">freeCodeCamp.org</a></p>
+</footer>
+```
+
+---
+
+## IDs and Classes
+
+| | `id` | `class` |
+|---|---|---|
+| Unique per page | Yes | No |
+| Spaces allowed | No (use `-` or `_`) | Yes (each word = separate class) |
+| CSS selector | `#id-name` | `.class-name` |
+| Best for | Targeting one specific element | Styling groups of elements |
+
+```html
+<h1 id="title">Movie Review Page</h1>
+<div id="red-box"></div>
+<div class="box red-box"></div>
+<div class="box blue-box"></div>
+```
+
+---
+
+## HTML Entities
+
+Used to display reserved or special characters as plain text:
+
+| Symbol | Named | Decimal | Hex |
+|---|---|---|---|
+| `<` | `&lt;` | `&#60;` | `&#x3C;` |
+| `>` | `&gt;` | `&#62;` | `&#x3E;` |
+| `&` | `&amp;` | `&#38;` | `&#x26;` |
+| `©` | `&copy;` | `&#169;` | `&#xA9;` |
+| `€` | `&euro;` | `&#8364;` | `&#x20AC;` |
+
+```html
+<p>This is an &lt;img /&gt; element</p>
+```
+
+---
+
+## Linking Resources
+
+### `<link>` — external stylesheets, fonts, icons
+
+```html
+<link rel="stylesheet" href="./styles.css" />
+<link rel="icon" href="favicon.ico" />
+```
+
+### `<script>` — external JavaScript (best practice)
+
+```html
+<!-- inline (avoid in real projects) -->
+<script>alert("Hello");</script>
+
+<!-- external file (recommended) -->
+<script src="./script.js"></script>
+```
+
+> Place `<script>` at the **end of `<body>`** so HTML loads before JavaScript runs.
+
+---
+
+## HTML Boilerplate
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Title</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- content goes here -->
+    <script src="./script.js"></script>
+  </body>
+</html>
+```
+
+| Part | Purpose |
+|---|---|
+| `<!DOCTYPE html>` | Declares HTML5 |
+| `<html lang="en">` | Root element — sets page language |
+| `<head>` | Behind-the-scenes metadata |
+| `<meta charset="UTF-8">` | Character encoding — supports all languages and symbols |
+| `<meta name="viewport">` | Responsive layout on mobile |
+| `<title>` | Text shown in the browser tab |
+| `<body>` | All visible page content |
+
+---
+
+## SEO and Social Sharing
+
+### Meta description
+```html
+<meta name="description" content="Short description of the page." />
+```
+
+### Open Graph tags
+
+```html
+<meta property="og:title" content="freeCodeCamp.org" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.freecodecamp.org" />
+<meta property="og:image" content="https://example.com/image.png" />
+```
+
+| Property | Purpose |
+|---|---|
+| `og:title` | Title shown in social media previews |
+| `og:type` | Content type (`website`, `article`, `video`) |
+| `og:url` | Canonical URL for the post |
+| `og:image` | Preview image (recommended: 1200×630px min) |
+
+---
+
+## Media
+
+### `<audio>`
+
+```html
+<audio src="audio.mp3" controls loop muted></audio>
+
+<!-- multiple formats for browser compatibility -->
+<audio controls>
+  <source src="audio.ogg" type="audio/ogg" />
+  <source src="audio.wav" type="audio/wav" />
+  <source src="audio.mp3" type="audio/mpeg" />
+</audio>
+```
+
+### `<video>`
+
+```html
+<video src="video.mp4" controls loop muted poster="thumbnail.jpg" width="400"></video>
+```
+
+### Audio/Video attributes
+
+| Attribute | Type | Purpose |
+|---|---|---|
+| `controls` | boolean | Shows playback controls |
+| `loop` | boolean | Replays continuously |
+| `muted` | boolean | Starts muted |
+| `autoplay` | boolean | Plays automatically |
+| `poster` | — | Image shown while video loads (video only) |
+
+### `<iframe>` — embed external content
+
+```html
+<iframe
+  src="https://www.youtube.com/embed/VIDEO_ID"
+  width="560"
+  height="315"
+  title="Video title"
+  allowfullscreen
+></iframe>
+```
+
+### Media optimisation
+
+| Factor | Recommendation |
+|---|---|
+| Size | Match image dimensions to display size |
+| Format | Prefer `WEBP` or `AVIF` over `PNG`/`JPG` |
+| Compression | Lossless (PNG) = no quality loss / Lossy (JPG) = permanent data loss |
+
+### SVGs
+
+- **Scalable Vector Graphic** — paths and equations, not pixels
+- Scales to any size without quality loss
+- Stored in XML — editable directly in HTML
+
+```html
+<svg width="100" height="100" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="45" fill="yellow" />
+</svg>
+```
+
+---
+
+## Paths
+
+| Syntax | Meaning |
+|---|---|
+| `/` | Path separator |
+| `./` | Current directory |
+| `../` | Parent directory (one level up) |
+
+| Type | Includes protocol/domain | Use when |
+|---|---|---|
+| Absolute path | No | Referencing from root on local machine |
+| Absolute URL | Yes | Linking to external websites |
+| Relative path | No | Linking within the same site |
+
+```html
+<img src="./photo.jpg" />           <!-- same folder -->
+<link href="../src/styles.css" />   <!-- one level up -->
+<a href="https://example.com">      <!-- external site -->
+```
+
+---
+
+## `target` Attribute
+
+| Value | Opens in |
+|---|---|
+| `_self` | Same tab (default) |
+| `_blank` | New tab |
+| `_parent` | Parent browsing context |
+| `_top` | Top-most browsing context (escapes all frames) |
+
+```html
+<a href="https://freecodecamp.org" target="_blank">Open in new tab</a>
+```
+
+---
+
+## Link States
+
+Must be written in this order in CSS:
+
+```css
+a:link    { color: blue; }     /* not yet visited */
+a:visited { color: purple; }   /* already visited */
+a:hover   { color: red; }      /* cursor over link */
+a:focus   { color: green; }    /* focused via Tab key */
+a:active  { color: black; }    /* being clicked */
+```
+
+> Mnemonic: **L**o**V**e **H**ates **F**ear and **A**nger
