@@ -2053,3 +2053,486 @@ a:active  { color: black; }    /* being clicked */
 ```
 
 > Mnemonic: **L**o**V**e **H**ates **F**ear and **A**nger
+
+
+# Why Semantic HTML Matters
+
+## What is semantics in HTML
+
+- Semantics = the **meaning** of elements in a language
+- Each HTML element conveys **special information** about its content
+- Think of an HTML document like a text document — headings, paragraphs, bold text all have meaning
+
+```html
+<!-- <p> semantically means "a paragraph of text" -->
+<p>
+  Let me tell you about my fantastic holiday in Paris.
+  I saw the impressive Eiffel Tower up close!
+</p>
+```
+
+> The `<div>` element is one of the very few HTML elements with **no semantic meaning**.
+
+---
+
+## Why semantic HTML matters
+
+### 1. Accessibility
+- Ensures the best experience for users with **assistive technology** like screen readers
+- Screen readers rely on semantic meaning to describe content correctly
+
+### 2. SEO
+- Proper semantic elements can **improve search engine rankings**
+- Search engines better understand the structure and relevance of your content
+
+### 3. Developer experience
+- Easier to read and navigate your own code
+- Instead of sifting through generic `<div>` elements, you can go straight to `<nav>`, `<header>`, `<footer>`, etc.
+
+---
+
+## Semantic vs non-semantic
+
+```html
+<!-- ⚠️ avoid — no meaning, hard to read -->
+<div>
+  <div>My Website</div>
+  <div>Welcome to my page</div>
+</div>
+
+<!-- ✅ correct — clear meaning at a glance -->
+<header>
+  <h1>My Website</h1>
+  <nav>...</nav>
+</header>
+<main>
+  <p>Welcome to my page</p>
+</main>
+```
+
+---
+
+## Key takeaway
+
+Using the **right element for the right content** improves:
+- Accessibility for all users
+- Visibility on search engines
+- Readability and maintainability of your code
+
+
+# Structural Hierarchy in HTML
+
+## What is structural hierarchy
+
+- The correct, logical ordering of **heading elements** in an HTML document
+- Think of it like a text document — headings, subheadings, and body text follow a clear order
+
+---
+
+## Heading levels
+
+| Element | Role | Notes |
+|---|---|---|
+| `<h1>` | Top-level heading | Typically only **one per page** — comes before all content |
+| `<h2>` | Subheading | Always after `<h1>` — multiple allowed, used to separate sections |
+| `<h3>` | Sub-subheading | Always after `<h2>` — never skip directly from `<h1>` |
+| `<h4>`–`<h6>` | Deeper levels | Follow the same rule — never skip levels |
+
+---
+
+## Correct vs incorrect hierarchy
+
+```html
+<!-- ✅ correct — logical order, multiple h2s allowed -->
+<section>
+  <h1>freeCodeCamp</h1>
+  <h2>Learn Front-End Development</h2>
+  <h2>Learn Back-End Development</h2>
+</section>
+
+<!-- ⚠️ incorrect — h3 appears before h2 -->
+<section>
+  <h1>freeCodeCamp</h1>
+  <h3>Introduction to HTML</h3>
+  <h2>Learn Front-End Development</h2>
+</section>
+```
+
+---
+
+## Don't use headings for styling
+
+```html
+<!-- ⚠️ avoid — using h1 just to get large text -->
+<article>
+  <p>Here is some <h1>Large Text</h1></p>
+</article>
+
+<!-- ✅ correct — use the right element, style with CSS -->
+<article>
+  <p class="large-text">Here is some large text</p>
+</article>
+```
+
+> Choose the heading level that fits the **document structure**, not the visual style you want.
+
+---
+
+## Why hierarchy matters
+
+### Accessibility
+- Screen readers rely on heading structure to **navigate and announce content**
+- An `<h3>` after an `<h1>` (skipping `<h2>`) may make users think they missed content
+
+### SEO
+- Search engines parse heading structure to **rank and categorise content**
+- Malformed structure can hurt your position in search results
+
+### Valid HTML
+- Incorrect structure may produce **technically invalid HTML**
+- Browsers will try to guess your intent — and may get it wrong
+
+---
+
+## Quick rules
+
+- One `<h1>` per page
+- Never skip heading levels (e.g. `h1` → `h3`)
+- Multiple headings at the same level are fine within sections
+- Use CSS for font size — not heading level
+
+
+# Presentational vs Semantic HTML
+
+## The core difference
+
+| | Presentational HTML | Semantic HTML |
+|---|---|---|
+| **Focus** | Appearance and style | Meaning and structure |
+| **Status** | Deprecated — avoid | Recommended modern practice |
+| **Styling** | Done in HTML | Done in CSS |
+| **Accessibility** | Poor | Good |
+| **Maintainability** | Hard | Easy |
+
+---
+
+## Deprecated presentational elements (avoid these)
+
+### `<font>` — sets font size and colour
+```html
+<!-- ⚠️ deprecated — don't use -->
+<font size="5" color="blue">This text is blue and large.</font>
+```
+- `size` range: `1` (smallest) to `7` (largest), default is `3`
+- Use CSS `color` and `font-size` instead
+
+---
+
+### `<center>` — horizontally centres content
+```html
+<!-- ⚠️ deprecated — don't use -->
+<center>
+  This text is centered.
+  <p>HTML is awesome.</p>
+</center>
+```
+- Use CSS `text-align: center` instead
+
+---
+
+### `<big>` — makes text one level larger
+```html
+<!-- ⚠️ deprecated — don't use -->
+<p>Normal text. <big>This text is larger.</big></p>
+```
+- Use CSS `font-size` instead
+
+---
+
+## Semantic HTML elements (use these)
+
+Describe the **purpose** of the content — easy to read, understand, and maintain:
+
+| Element | Purpose |
+|---|---|
+| `<header>` | Header of the document or section |
+| `<nav>` | Section containing navigation links |
+| `<main>` | Main content of the page |
+| `<section>` | Groups related content |
+| `<article>` | Self-contained piece of content |
+| `<figure>` | Illustrations, diagrams, images |
+| `<footer>` | Bottom of the document or section |
+
+```html
+<!-- ✅ semantic — clear structure and purpose -->
+<header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Products</a>
+    <a href="#">Contact</a>
+  </nav>
+</header>
+```
+
+---
+
+## Why semantic HTML is recommended
+
+- **Accessibility** — screen readers use semantic elements to describe page content
+- **SEO** — search engines better understand and rank pages with clear structure
+- **Maintainability** — developers can instantly understand the purpose of each section
+- **Separation of concerns** — structure in HTML, styling in CSS
+
+
+# `<em>` vs `<i>` — Emphasis vs Idiomatic Text
+
+## The core difference
+
+| | `<i>` (idiomatic text) | `<em>` (emphasis) |
+|---|---|---|
+| **Original purpose** | Display text in italics (presentational) | Semantic emphasis |
+| **Modern use** | Text that is *different* from surrounding content | Text that is *important* compared to surrounding content |
+| **Conveys importance** | No | Yes |
+| **Affects meaning** | No | Yes — changes how the sentence is understood |
+| **Screen readers** | Treated as visually different | Announced with added stress |
+
+---
+
+## `<i>` — idiomatic text
+
+Used for text that is somehow **different** from the surrounding text, but not necessarily important:
+
+- Foreign or idiomatic phrases
+- Technical terms
+- Alternative voice or mood
+- Thoughts
+
+```html
+<!-- foreign language phrase -->
+<p>There is a certain <i lang="fr">je ne sais quoi</i> in the air.</p>
+
+<!-- technical term -->
+<p>The process is known as <i>photosynthesis</i>.</p>
+```
+
+> The `lang` attribute specifies the language of the content inside `<i>`.
+
+---
+
+## `<em>` — emphasis
+
+Used when a word or phrase requires **special emphasis** that changes the meaning of the sentence. Usually limited to a few words:
+
+```html
+<p>Never give up on <em>your</em> dreams.</p>
+```
+
+> Stressing *your* changes the meaning — it's about your dreams specifically, not someone else's.
+
+---
+
+## When to use neither — use CSS instead
+
+If the text has **no special purpose or meaning** and you just want it to look italic, use CSS:
+
+```html
+<!-- ⚠️ avoid — using <i> or <em> for pure styling -->
+<p><i>This is just styled text with no special meaning.</i></p>
+
+<!-- ✅ correct — use CSS for presentational italics -->
+<p class="stylised">This is just styled text with no special meaning.</p>
+```
+
+```css
+.stylised {
+  font-style: italic;
+}
+```
+
+---
+
+## Quick decision guide
+
+```
+Is the text a foreign phrase, technical term, or alternative voice?
+  → use <i>
+
+Does the text need emphasis that changes the meaning of the sentence?
+  → use <em>
+
+Do you just want italic styling with no semantic purpose?
+  → use CSS font-style: italic
+```
+
+
+
+
+# `<strong>` vs `<b>` — Strong Importance vs Bring Attention To
+
+## The core difference
+
+| | `<b>` (bring attention to) | `<strong>` (strong importance) |
+|---|---|---|
+| **Purpose** | Draw attention to text | Convey importance or urgency |
+| **Semantic meaning** | No — purely attention | Yes — signals criticality |
+| **Default style** | Bold | Bold |
+| **Screen readers** | No special announcement | Announced with added importance |
+
+> Both look the same visually — the difference is in **meaning**, not appearance.
+
+---
+
+## `<b>` — bring attention to
+
+Used to highlight text that should stand out, but **without implying it is critical**:
+
+- Keywords in summaries
+- Product names in reviews
+- Key terms in prose
+
+```html
+<p>
+  We tested the <b>SuperSound 3000</b> for audio quality,
+  the <b>QuickCharge Pro</b> for fast charging, and the
+  <b>EcoClean Vacuum</b> for cleaning.
+</p>
+```
+
+---
+
+## `<strong>` — strong importance
+
+Used for text that is **crucial, urgent, or serious** — where the meaning would suffer without emphasis:
+
+```html
+<p>
+  <strong>Warning:</strong> This product may cause allergic reactions.
+</p>
+```
+
+---
+
+## When to use neither — use CSS instead
+
+If you just want bold text with no semantic purpose, use CSS:
+
+```html
+<!-- ⚠️ avoid — using <b> or <strong> for pure styling -->
+<p><b>This is just visually bold text.</b></p>
+
+<!-- ✅ correct — use CSS for presentational bold -->
+<p class="highlight">This is just visually bold text.</p>
+```
+
+```css
+.highlight {
+  font-weight: bold;
+}
+```
+
+---
+
+## Quick decision guide
+
+```
+Is the text a keyword, product name, or term worth noticing?
+  → use <b>
+
+Is the text a warning, critical instruction, or urgent information?
+  → use <strong>
+
+Do you just want bold styling with no semantic purpose?
+  → use CSS font-weight: bold
+```
+
+
+
+# Description Lists in HTML
+
+## What is a description list
+
+- Used to present **key-value pairs** — a term/label and its related information
+- Perfect for glossaries, dictionaries, FAQs, recipes, product specs, and metadata
+- Any situation where one piece of information **labels** another
+
+---
+
+## The 3 elements
+
+| Element | Role |
+|---|---|
+| `<dl>` | **Description list** — container for the entire list |
+| `<dt>` | **Description term** — the label or key |
+| `<dd>` | **Description details** — the value, definition, or related info |
+
+---
+
+## Basic syntax
+
+```html
+<dl>
+  <dt>Term</dt>
+  <dd>Details or definition for the term</dd>
+</dl>
+```
+
+> By default, `<dd>` is indented to the right to visually separate it from `<dt>`.
+
+---
+
+## Example — glossary
+
+```html
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+
+  <dt>JS</dt>
+  <dd>JavaScript</dd>
+</dl>
+```
+
+---
+
+## Example — recipe ingredients
+
+```html
+<dl>
+  <dt>Flour</dt>
+  <dd>2 cups</dd>
+
+  <dt>Sugar</dt>
+  <dd>1/2 cup</dd>
+
+  <dt>Vegetable Oil</dt>
+  <dd>2 tablespoons</dd>
+</dl>
+```
+
+---
+
+## When to use description lists
+
+Use a `<dl>` whenever you have content in **key-value pair format**:
+
+| Use case | Key (`<dt>`) | Value (`<dd>`) |
+|---|---|---|
+| Glossary / dictionary | Term | Definition |
+| Recipe | Ingredient | Amount |
+| Product specs | Spec name | Spec value |
+| FAQ | Question | Answer |
+| Contact info | Label (e.g. Phone) | Value |
+| Metadata | Property name | Property value |
+
+---
+
+## Quick rule
+
+```
+Do you have two related pieces of information where one labels the other?
+  → use a description list <dl>
+```
