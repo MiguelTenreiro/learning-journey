@@ -2536,3 +2536,307 @@ Use a `<dl>` whenever you have content in **key-value pair format**:
 Do you have two related pieces of information where one labels the other?
   → use a description list <dl>
 ```
+
+
+# Block and Inline Quotes in HTML
+
+## Two types of quotes
+
+| | `<blockquote>` | `<q>` |
+|---|---|---|
+| **Use for** | Extended quotations from another source | Short inline quotations within a paragraph |
+| **Display** | Indented block — visually separate from content | Inline — part of the surrounding text |
+| **Quotation marks** | Must be written manually if needed | Added automatically by most browsers |
+| **`cite` attribute** | Yes | Yes |
+
+---
+
+## `<blockquote>` — block quotation
+
+For **long, extended quotes** from another source:
+
+```html
+<blockquote cite="https://www.example.com/source">
+  "Can you imagine what it would be like to be a successful developer?"
+</blockquote>
+```
+
+### Multiple paragraphs in one block quote
+
+```html
+<blockquote cite="https://www.example.com/source">
+  <p>Build your projects. Show them to your friends.</p>
+  <p>Build your network. Help the people you meet along the way.</p>
+  <p>It is not too late. Life is long.</p>
+</blockquote>
+```
+
+> Wrapping paragraphs inside one `<blockquote>` keeps them as part of the same quotation.
+
+---
+
+## The `cite` attribute vs the `<cite>` element
+
+These are two different things:
+
+| | `cite` attribute | `<cite>` element |
+|---|---|---|
+| **Type** | HTML attribute | HTML element |
+| **Used on** | `<blockquote>`, `<q>` | Standalone — wraps the title of a work |
+| **Visible to user** | No — works behind the scenes | Yes — displayed on the page |
+| **Purpose** | Gives screen readers and search engines source info | Marks up the title of a book, article, film, song, etc. |
+
+### Attributing a source visually with `<cite>`
+
+```html
+<div>
+  <blockquote cite="https://www.example.com/source">
+    Can you imagine what it would be like to be a successful developer?
+  </blockquote>
+  <p>—Quincy Larson, <cite>How to Learn to Code and Get a Developer Job.</cite></p>
+</div>
+```
+
+---
+
+## `<q>` — inline quotation
+
+For **short quotes** that sit within a larger paragraph:
+
+```html
+<p>
+  As Quincy Larson said,
+  <q cite="https://www.example.com/source">Momentum is everything.</q>
+</p>
+```
+
+> Most modern browsers automatically add quotation marks around `<q>` content.
+
+---
+
+## Quick decision guide
+
+```
+Is the quote long and from an external source?
+  → use <blockquote>
+
+Is the quote short and part of an existing paragraph?
+  → use <q>
+
+Do you want to visually credit the source or title of a work?
+  → use <cite> element
+
+Do you want to provide source info to screen readers and search engines only?
+  → use the cite attribute
+```
+
+
+# Abbreviations in HTML
+
+## Types of abbreviations
+
+| Type | Definition | Pronounced | Example |
+|---|---|---|---|
+| **Acronym** | Letters form a pronounceable word | As a word | `GUI` → Graphical User Interface |
+| **Initialism** | Letters spell out individually | Letter by letter | `HTML` → HyperText Markup Language |
+
+> Both are types of abbreviations — the distinction is in how they are spoken.
+
+---
+
+## The `<abbr>` element
+
+Used to mark up abbreviations, acronyms, and initialisms in HTML:
+
+```html
+<p><abbr>HTML</abbr> is the foundation of the web.</p>
+```
+
+> Without any attributes, `<abbr>` provides context behind the scenes but looks like normal text.
+
+---
+
+## The `title` attribute
+
+Optional — provides the full expanded form as a **tooltip** on hover:
+
+```html
+<p>
+  <abbr title="HyperText Markup Language">HTML</abbr> is the foundation of the web.
+</p>
+```
+
+- Value must be a **human-readable** description of the abbreviation
+- Most browsers display a **dotted underline** or **small caps** when `title` is present
+- Hovering over the element shows the full form as a tooltip
+
+---
+
+## More examples
+
+```html
+<p>
+  The <abbr title="Graphical User Interface">GUI</abbr> makes software easier to use.
+</p>
+
+<p>
+  She has a <abbr title="Doctor of Philosophy">PhD</abbr> in computer science.
+</p>
+
+<p>
+  We use <abbr title="Cascading Style Sheets">CSS</abbr> to style web pages.
+</p>
+```
+
+---
+
+## When to use `<abbr>`
+
+- When the abbreviation might be **unclear** to the reader
+- When it needs **additional context** to be understood
+- When it appears **for the first time** — always explain the full meaning on first use
+
+> You don't need to wrap every abbreviation — use your judgement to keep text clear without cluttering it.
+
+
+# Displaying Addresses in HTML
+
+## The `<address>` element
+
+- A **semantic element** for representing contact information
+- Use instead of a generic `<div>` for contact sections
+- Versatile — works for business pages, author pages, personal sites, and more
+
+---
+
+## Full example
+
+```html
+<address>
+  <h2>Company Name</h2>
+  <p>
+    1234 Elm Street<br />
+    Springfield, IL 62701<br />
+    United States
+  </p>
+  <p>Phone: <a href="tel:+15555555555">+1 (555) 555-5555</a></p>
+  <p>Email: <a href="mailto:contact@company.com">contact@company.com</a></p>
+</address>
+```
+
+---
+
+## Key elements used inside `<address>`
+
+### `<br />` — line break
+Used to separate lines within a physical address without creating a new paragraph:
+
+```html
+<p>
+  1234 Elm Street<br />
+  Springfield, IL 62701<br />
+  United States
+</p>
+```
+
+### `tel:` link — clickable phone number
+Creates a link that initiates a phone call on supported devices:
+
+```html
+<a href="tel:+15555555555">+1 (555) 555-5555</a>
+```
+
+### `mailto:` link — clickable email address
+Opens the user's default email client with a new message:
+
+```html
+<a href="mailto:contact@company.com">contact@company.com</a>
+```
+
+> ⚠️ `mailto:` links are often associated with spam — use with caution.
+
+---
+
+## Why use `<address>` over `<div>`
+
+| | `<div>` | `<address>` |
+|---|---|---|
+| **Semantic meaning** | None | Clearly marks contact information |
+| **Accessibility** | Screen readers treat it as generic content | Screen readers identify it as contact info |
+| **SEO** | No signal | Helps search engines understand the content |
+
+
+
+# Displaying Times and Dates in HTML
+
+## The `<time>` element
+
+- Used to represent a **specific moment in time**
+- The `datetime` attribute translates it into a **machine-readable format**
+- Helps with search engine results and browser processing of date/time info
+
+---
+
+## The `datetime` attribute
+
+The value must be one of:
+
+| Format | Example |
+|---|---|
+| Valid year | `2024` |
+| Valid month | `2024-06` |
+| Valid date | `2024-06-15` |
+| Valid time | `20:00` |
+| Date + time (ISO 8601) | `2024-06-15T15:00` |
+| Duration | `PT2H30M` (2 hours 30 min) |
+
+---
+
+## Examples
+
+### Time only
+
+```html
+<p>The reservations are for <time datetime="20:00">20:00</time>.</p>
+```
+
+### Date + time (ISO 8601)
+
+```html
+<p>The graduation will be on <time datetime="2024-06-15T15:00">June 15</time>.</p>
+```
+
+### ISO 8601 format breakdown
+
+```
+2024  -  06  -  15  T  15:00
+ │        │      │  │    │
+year   month   day  │   time (15:00 = 3 PM)
+                    │
+             separator between date and time
+```
+
+---
+
+## Why use `<time>`
+
+- Helps **search engines** understand event dates and publication times
+- Allows **browsers** to process date/time info more effectively
+- Improves **accessibility** for screen readers
+
+---
+
+## When to use `<time>`
+
+- Events and appointments
+- Publication dates
+- Schedules and reservations
+
+```html
+<!-- event -->
+<p>The concert starts at <time datetime="2024-09-21T19:30">7:30 PM on September 21</time>.</p>
+
+<!-- publication date -->
+<p>Published on <time datetime="2024-01-10">January 10, 2024</time>.</p>
+```
+
