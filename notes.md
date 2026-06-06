@@ -3500,3 +3500,176 @@ The `<input>` element can also create buttons using `type="button"`, `type="subm
 ```
 
 > Prefer `<button>` over `<input>` for buttons — it is more flexible and easier to style.
+
+
+
+# Client-Side Form Validation in HTML
+
+## Key concepts
+
+| Term | Definition |
+|---|---|
+| **Client-side** | Everything that happens on the user's device — layout, design, interactive features |
+| **Server-side** | Everything that happens on the server — processing data, handling requests |
+| **Client-side validation** | Checks user input before it is sent to the server |
+
+> ⚠️ Client-side validation is not enough on its own — malicious users can bypass it. Always add server-side validation too.
+
+---
+
+## The `required` attribute
+
+Prevents form submission if the field is empty:
+
+```html
+<form action="">
+  <label for="email">Email Address (Required):</label>
+  <input required type="email" name="email" id="email" />
+  <button type="submit">Submit Form</button>
+</form>
+```
+
+> Each browser displays its own style of alert message when validation fails.
+
+---
+
+## Built-in email validation
+
+The `type="email"` input automatically checks for basic email format (e.g. requires `@`):
+
+```html
+<input required type="email" name="email" id="email" />
+```
+
+- Typing `abc` and submitting → browser alerts that `@` is missing
+- Basic format only — additional validation must be added manually
+
+---
+
+## `minlength` and `maxlength` attributes
+
+Set minimum and maximum character length for the input:
+
+```html
+<form action="">
+  <label for="email">Email Address (Required):</label>
+  <input
+    required
+    type="email"
+    name="email"
+    id="email"
+    minlength="4"
+    maxlength="64"
+  />
+  <button type="submit">Submit Form</button>
+</form>
+```
+
+| Attribute | Purpose |
+|---|---|
+| `minlength` | Minimum number of characters required |
+| `maxlength` | Maximum number of characters allowed |
+
+> Submitting `b@m` (3 characters) with `minlength="4"` triggers an alert — too short.
+
+---
+
+## Common validation attributes — quick reference
+
+| Attribute | Works on | Purpose |
+|---|---|---|
+| `required` | All inputs | Field must not be empty |
+| `type="email"` | `<input>` | Enforces basic email format |
+| `minlength` | Text-based inputs | Minimum character count |
+| `maxlength` | Text-based inputs | Maximum character count |
+| `min` | Number, date inputs | Minimum value |
+| `max` | Number, date inputs | Maximum value |
+| `pattern` | Text-based inputs | Custom regex validation |
+
+
+
+
+# Form States in HTML
+
+## The 4 main form states
+
+| State | How it's triggered | Can be focused | User can edit |
+|---|---|---|---|
+| `default` | Page loads | Yes | Yes |
+| `focused` | Click or `Tab` key | Yes | Yes |
+| `disabled` | `disabled` attribute | No | No |
+| `readonly` | `readonly` attribute | Yes | No |
+
+---
+
+## Default state
+
+The input as it appears when first rendered on the page — blank and interactive:
+
+```html
+<input type="email" name="email" id="email" />
+```
+
+---
+
+## Focused state
+
+Active when the user clicks the input or selects it with the `Tab` key. Most browsers show a **blue highlighted border** by default:
+
+```html
+<input type="email" name="email" id="email" />
+```
+
+> Additional focus styles can be added with CSS.
+
+---
+
+## Disabled state
+
+The input **cannot be focused or activated** by the user:
+
+```html
+<input disabled type="email" name="email" id="email" />
+```
+
+- User cannot click or tab into it
+- Visually appears greyed out in most browsers
+- Additional styles can be set with CSS
+
+---
+
+## Readonly state
+
+The input **can be focused but not edited**. Use the `value` attribute to set the displayed value:
+
+```html
+<input
+  readonly
+  type="email"
+  name="email"
+  id="email"
+  value="example@email.com"
+/>
+```
+
+- User can see and copy the value
+- User cannot change it
+
+---
+
+## `disabled` vs `readonly`
+
+| | `disabled` | `readonly` |
+|---|---|---|
+| Can be focused | No | Yes |
+| Can be edited | No | No |
+| Value submitted with form | No | Yes |
+| Visual indication | Greyed out | Normal appearance |
+
+---
+
+## Why form states matter
+
+- Give users **clear feedback** about what they can and cannot interact with
+- Help **prevent errors** by guiding users through the form
+- Improve the overall **user experience** and accessibility
