@@ -2840,3 +2840,663 @@ year   month   day  │   time (15:00 = 3 PM)
 <p>Published on <time datetime="2024-01-10">January 10, 2024</time>.</p>
 ```
 
+# Superscript and Subscript in HTML
+
+## The two elements
+
+| Element | Name | Position | Use for |
+|---|---|---|---|
+| `<sup>` | Superscript | **Above** the normal text line | Exponents, abbreviations, ordinal numbers |
+| `<sub>` | Subscript | **Below** the normal text line | Chemical formulas, footnotes, variable subscripts |
+
+---
+
+## `<sup>` — superscript
+
+Text displayed **raised** above the baseline, in smaller size:
+
+### Exponents
+
+```html
+<p>2<sup>2</sup> (2 squared) is 4.</p>
+<p>The speed of light is approximately 3 × 10<sup>8</sup> m/s.</p>
+```
+
+### Superior lettering (abbreviations)
+
+```html
+<p>Monseigneur is often written as <strong>M<sup>gr</sup></strong>.</p>
+```
+
+### Ordinal numbers
+
+```html
+<p>She finished in 1<sup>st</sup> place.</p>
+<p>It's on the 2<sup>nd</sup> floor.</p>
+```
+
+---
+
+## `<sub>` — subscript
+
+Text displayed **lowered** below the baseline, in smaller size:
+
+### Chemical formulas
+
+```html
+<p>CO<sub>2</sub></p>               <!-- Carbon dioxide -->
+<p>H<sub>2</sub>O</p>              <!-- Water -->
+<p>H<sub>2</sub>SO<sub>4</sub></p> <!-- Sulphuric acid -->
+```
+
+### Footnotes
+
+```html
+<p>This claim is disputed.<sub>1</sub></p>
+```
+
+### Variable subscripts (maths)
+
+```html
+<p>The variable x<sub>1</sub> represents the first value.</p>
+```
+
+---
+
+## Important rule
+
+Both elements should only be used for **typographical reasons** — when the raised or lowered text is part of the meaning (maths, chemistry, abbreviations).
+
+```
+Do you need raised/lowered text for semantic reasons (exponents, formulas)?
+  → use <sup> or <sub>
+
+Do you just want visually raised/lowered text for styling?
+  → use CSS vertical-align and font-size
+```
+
+
+
+# Representing Code in HTML
+
+## The two elements
+
+| Element | Purpose | Displays |
+|---|---|---|
+| `<code>` | Short inline code snippets | Monospaced font, inline |
+| `<pre>` | Preformatted text block | Preserves whitespace and indentation exactly as written |
+
+---
+
+## `<code>` — inline code
+
+For **short, single-line** code snippets within text:
+
+```html
+<p>
+  To set the text color to blue in CSS, use the following code:
+  <code>color: blue;</code>
+</p>
+```
+
+- Browser applies **monospaced font** by default
+- Communicates to the browser that the content is a code snippet
+
+---
+
+## `<pre>` + `<code>` — multi-line code blocks
+
+For **longer, multi-line** code snippets:
+
+```html
+<pre>
+  <code>
+    body {
+      color: red;
+    }
+  </code>
+</pre>
+```
+
+> ⚠️ `<pre>` preserves **all whitespace and indentation** exactly as written in the HTML — be mindful of spacing.
+
+---
+
+## More examples
+
+### Inline — referencing an HTML element
+
+```html
+<p>Use the <code>&lt;img&gt;</code> element to add images to your page.</p>
+```
+
+### Block — JavaScript function
+
+```html
+<pre>
+  <code>
+    function greet(name) {
+      return "Hello, " + name;
+    }
+  </code>
+</pre>
+```
+
+---
+
+## Quick decision guide
+
+```
+Is it a short snippet within a sentence?
+  → use <code>
+
+Is it multiple lines that need preserved formatting?
+  → use <pre> wrapping <code>
+```
+
+
+
+# The `<u>`, `<s>`, and `<ruby>` Elements
+
+## Quick overview
+
+| Element | Name | Purpose |
+|---|---|---|
+| `<u>` | Unarticulated annotation | Marks text with non-textual annotation (e.g. spelling errors) |
+| `<s>` | Strikethrough | Marks text that is no longer accurate or relevant |
+| `<ruby>` | Ruby | Shows small annotation text above/below main text (e.g. pronunciation) |
+
+---
+
+## `<u>` — unarticulated annotation
+
+Used for inline text that has **non-textual annotation** applied — most commonly spelling errors:
+
+```html
+<p>
+  You can use this element to highlight
+  <u>inccccort</u> <u>spling</u> <u>issses</u>.
+</p>
+```
+
+- Default style: **black underline** beneath the text
+- In HTML4 it was used for visual underlining — in **HTML5 it is semantic only**
+
+> To underline text for styling purposes only, use CSS `text-decoration: underline` instead.
+
+---
+
+## `<s>` — strikethrough
+
+Used when text is **no longer accurate or relevant**:
+
+```html
+<p><s>Tomorrow's hike will be meeting at noon.</s></p>
+<p>Due to unforeseen weather conditions, the hike has been canceled.</p>
+```
+
+- Default style: **horizontal line through** the text
+- Should **not** be used to show document edits or tracked changes
+
+> For document changes use `<del>` (deleted text) and `<ins>` (inserted text) instead.
+
+---
+
+## `<ruby>` — ruby annotation
+
+Shows **small annotation text** above or below the main text. Most commonly used for pronunciation of East Asian characters:
+
+```html
+<ruby>
+  明日
+  <rp>(</rp>
+  <rt>Ashita</rt>
+  <rp>)</rp>
+</ruby>
+```
+
+### Elements used with `<ruby>`
+
+| Element | Name | Purpose |
+|---|---|---|
+| `<rt>` | Ruby text | The annotation text — pronunciation or translation |
+| `<rp>` | Ruby fallback parenthesis | Shown as fallback in browsers that don't support ruby |
+
+---
+
+## Key rules
+
+```
+Need to flag a spelling error or non-textual annotation?
+  → use <u>
+
+Need to show text that is no longer accurate or relevant?
+  → use <s>
+
+Need to show document edits (additions/deletions)?
+  → use <ins> and <del> instead of <s>
+
+Need to add pronunciation or translation above East Asian characters?
+  → use <ruby> with <rt> and <rp>
+
+Just want visual underlining or strikethrough for styling?
+  → use CSS text-decoration
+```
+
+# Semantic HTML Review
+
+## Why semantic HTML matters
+
+- **Accessibility** — screen readers use semantic meaning to describe content
+- **SEO** — search engines better understand and rank your content
+- **Maintainability** — code is easier to read and navigate
+- Use **CSS** for visual styling — not presentational HTML elements
+
+---
+
+## Structural hierarchy
+
+- `<h1>` is the highest level, `<h6>` the lowest
+- Never skip heading levels (e.g. `h1` → `h3`)
+- Only one `<h1>` per page
+
+---
+
+## Semantic vs presentational
+
+| Type | Examples | Status |
+|---|---|---|
+| Presentational | `<center>`, `<big>`, `<font>` | Deprecated — avoid |
+| Semantic | `<header>`, `<nav>`, `<figure>` | Recommended |
+
+---
+
+## Semantic layout elements
+
+### `<header>` — document or section header
+```html
+<header>
+  <h1>CatPhotoApp</h1>
+  <p>Welcome to our cat gallery.</p>
+</header>
+```
+
+### `<main>` — main page content
+```html
+<main>
+  <section>
+    <h2>Cat Photos</h2>
+  </section>
+</main>
+```
+
+### `<section>` — thematic content group
+```html
+<section>
+  <h2>About Me</h2>
+  <p>Hi, I am Jane Doe.</p>
+</section>
+```
+
+### `<nav>` — navigation links
+```html
+<nav>
+  <ul>
+    <li><a href="#photos">Photos</a></li>
+    <li><a href="#videos">Videos</a></li>
+  </ul>
+</nav>
+```
+
+### `<figure>` + `<figcaption>` — image with caption
+```html
+<figure>
+  <img src="cats.jpg" alt="Two tabby kittens sleeping." />
+  <figcaption>Cats <strong>hate</strong> other cats.</figcaption>
+</figure>
+```
+
+---
+
+## Text-level semantic elements
+
+### Emphasis and importance
+
+| Element | Name | Purpose | Default style |
+|---|---|---|---|
+| `<em>` | Emphasis | Stress emphasis that changes meaning | Italic |
+| `<i>` | Idiomatic text | Foreign terms, technical terms, alternative voice | Italic |
+| `<strong>` | Strong importance | Urgent or critical information | Bold |
+| `<b>` | Bring attention to | Keywords, product names — no added importance | Bold |
+
+```html
+<p>Never give up on <em>your</em> dreams.</p>
+<p>There is a certain <i lang="fr">je ne sais quoi</i> in the air.</p>
+<p><strong>Warning:</strong> This product may cause allergic reactions.</p>
+<p>We tested the <b>SuperSound 3000</b> and the <b>QuickCharge Pro</b>.</p>
+```
+
+---
+
+### Lists
+
+#### Description list — key-value pairs
+```html
+<dl>
+  <dt>HTML</dt>
+  <dd>HyperText Markup Language</dd>
+  <dt>CSS</dt>
+  <dd>Cascading Style Sheets</dd>
+</dl>
+```
+
+---
+
+### Quotations
+
+| Element | Use for |
+|---|---|
+| `<blockquote cite="">` | Extended quotes from another source |
+| `<q cite="">` | Short inline quotes |
+| `<cite>` | Title of a referenced work — visible to user |
+
+```html
+<!-- block quote with visible attribution -->
+<blockquote cite="https://www.example.com">
+  "Can you imagine what it would be like to be a successful developer?"
+</blockquote>
+<p>—Quincy Larson, <cite>How to Learn to Code and Get a Developer Job.</cite></p>
+
+<!-- inline quote -->
+<p>As Quincy Larson said, <q cite="https://www.example.com">Momentum is everything.</q></p>
+```
+
+---
+
+### Abbreviations
+```html
+<p><abbr title="HyperText Markup Language">HTML</abbr> is the foundation of the web.</p>
+```
+
+---
+
+### Contact address
+```html
+<address>
+  <p>1234 Elm Street<br />Springfield, IL</p>
+  <p><a href="mailto:contact@company.com">contact@company.com</a></p>
+</address>
+```
+
+---
+
+### Date and time
+```html
+<p>The reservations are for <time datetime="20:00">20:00</time>.</p>
+<p>The event is on <time datetime="2024-06-15T15:00">June 15 at 3 PM</time>.</p>
+```
+
+> ISO 8601 format: `YYYY-MM-DDThh:mm:ss` — `T` separates date from time.
+
+---
+
+### Superscript and subscript
+
+```html
+<p>2<sup>2</sup> is 4.</p>          <!-- exponent -->
+<p>She came 1<sup>st</sup>.</p>     <!-- ordinal -->
+<p>CO<sub>2</sub></p>               <!-- chemical formula -->
+```
+
+---
+
+### Code
+
+```html
+<!-- inline -->
+<p>Use <code>color: blue;</code> to set the text colour.</p>
+
+<!-- multi-line block -->
+<pre>
+  <code>
+    body {
+      color: red;
+    }
+  </code>
+</pre>
+```
+
+---
+
+### Annotation elements
+
+| Element | Purpose | Default style |
+|---|---|---|
+| `<u>` | Non-textual annotation (e.g. spelling errors) | Underline |
+| `<s>` | No longer accurate or relevant | Strikethrough |
+| `<ruby>` | Pronunciation/meaning for East Asian text | Annotation above |
+
+```html
+<p>Fix the <u>spling</u> errors.</p>
+<p><s>The hike is at noon.</s> The hike has been canceled.</p>
+<ruby>明日 <rp>(</rp><rt>Ashita</rt><rp>)</rp></ruby>
+```
+
+---
+
+### Internal links
+
+Link to another section on the same page using `href="#id"`:
+
+```html
+<a href="#about-section">Go to About Section</a>
+
+<section id="about-section">
+  <h2>About</h2>
+  <p>This is the about section.</p>
+</section>
+```
+
+> Common uses: skip links, table of contents, long pages with multiple sections.
+
+
+# Forms, Labels, and Inputs in HTML
+
+## The `<form>` element
+
+Container for all form inputs. The `action` attribute specifies where the data is sent on submission:
+
+```html
+<form action="url-goes-here">
+  <!-- inputs go here -->
+</form>
+```
+
+---
+
+## The `<input>` element
+
+- Void element — **no closing tag**
+- The `type` attribute defines what kind of data is expected
+
+```html
+<input type="text" />
+```
+
+### Common `type` values
+
+| Type | Purpose |
+|---|---|
+| `text` | Plain text input |
+| `email` | Email address — includes basic format validation |
+| `password` | Hidden text input |
+| `checkbox` | Checkbox |
+| `radio` | Radio button |
+| `number` | Numeric input |
+| `submit` | Submit button |
+
+---
+
+## The `<label>` element
+
+Associates a text description with an input. Clicking the label focuses the input.
+
+### Implicit association — nest `<input>` inside `<label>`
+
+```html
+<form action="">
+  <label>
+    Full Name:
+    <input type="text" />
+  </label>
+</form>
+```
+
+### Explicit association — use `for` and `id`
+
+The `for` value on `<label>` must match the `id` value on `<input>`:
+
+```html
+<form action="">
+  <label for="email">Email Address:</label>
+  <input type="email" id="email" />
+</form>
+```
+
+---
+
+## The `placeholder` attribute
+
+Shows hint text inside the input before the user types. Disappears on focus:
+
+```html
+<form action="">
+  <label for="email">Email Address:</label>
+  <input type="email" id="email" placeholder="example@email.com" />
+</form>
+```
+
+> Keep placeholder text short and representative of the expected format.
+
+---
+
+## Putting it all together
+
+```html
+<form action="/submit">
+  <label>
+    Full Name:
+    <input type="text" placeholder="Jane Doe" />
+  </label>
+
+  <label for="email">Email Address:</label>
+  <input type="email" id="email" placeholder="jane@example.com" />
+</form>
+```
+
+---
+
+## Implicit vs explicit association
+
+| | Implicit | Explicit |
+|---|---|---|
+| **How** | Nest `<input>` inside `<label>` | Match `for` on label with `id` on input |
+| **Extra attributes needed** | No | Yes — `for` and `id` |
+| **When to use** | Simple, compact forms | When label and input are not nested |
+
+# Button Types in HTML
+
+## The `<button>` element
+
+Used to perform an action when activated — submitting a form, showing a modal, toggling a menu, etc.:
+
+```html
+<button>Start Game</button>
+```
+
+---
+
+## The `type` attribute
+
+Controls the button's behaviour when clicked:
+
+| Value | Behaviour |
+|---|---|
+| `button` | Does nothing by default — behaviour added via JavaScript |
+| `submit` | Submits the form data to the server |
+| `reset` | Clears all input data in the form |
+
+---
+
+## `type="button"` — general purpose
+
+Does nothing on its own — use JavaScript to add interactivity:
+
+```html
+<button type="button">Show Alert</button>
+```
+
+---
+
+## `type="submit"` — form submission
+
+Sends the form data to the server when clicked:
+
+```html
+<form action="">
+  <label for="email">Email address:</label>
+  <input type="email" id="email" name="email" />
+  <button type="submit">Submit form</button>
+</form>
+```
+
+---
+
+## `type="reset"` — clear form
+
+Clears all user input in the form when clicked:
+
+```html
+<form action="">
+  <label for="email">Email address:</label>
+  <input type="email" id="email" name="email" />
+  <button type="reset">Reset form</button>
+  <button type="submit">Submit form</button>
+</form>
+```
+
+> ⚠️ Reset buttons are generally not recommended — users can accidentally clear their data. Multiple buttons can also clutter the UI.
+
+---
+
+## Using `<input>` as a button
+
+The `<input>` element can also create buttons using `type="button"`, `type="submit"`, or `type="reset"`. The button label is set with the `value` attribute:
+
+```html
+<input type="button" value="Start Game" />
+<input type="submit" value="Submit form" />
+<input type="reset" value="Reset form" />
+```
+
+---
+
+## `<button>` vs `<input>` for buttons
+
+| | `<input type="button">` | `<button>` |
+|---|---|---|
+| **Void element** | Yes — no closing tag, no children | No — has opening and closing tags |
+| **Can contain children** | No — text only via `value` attribute | Yes — text, images, icons |
+| **Flexibility** | Limited | More flexible |
+
+```html
+<!-- input — text only -->
+<input type="button" value="Start Game" />
+
+<!-- button — can contain icons and text -->
+<button type="button">
+  <img src="icon.svg" alt="" /> Start Game
+</button>
+```
+
+> Prefer `<button>` over `<input>` for buttons — it is more flexible and easier to style.
