@@ -3673,3 +3673,1027 @@ The input **can be focused but not edited**. Use the `value` attribute to set th
 - Give users **clear feedback** about what they can and cannot interact with
 - Help **prevent errors** by guiding users through the form
 - Improve the overall **user experience** and accessibility
+
+
+
+# HTML Tables
+
+## What tables are for
+
+- Displaying **tabular data** — structured information in rows and columns
+- Examples: statistics, schedules, pricing, comparisons
+
+> ⚠️ Do not use tables for page layout — use CSS Flexbox or Grid instead.
+
+---
+
+## Table element hierarchy
+
+```
+<table>
+├── <thead>   — table header section
+│   └── <tr>  — table row
+│       └── <th>  — header cell
+├── <tbody>   — table body section
+│   └── <tr>  — table row
+│       ├── <th>  — row header cell
+│       └── <td>  — data cell
+└── <tfoot>   — table footer section
+    └── <tr>  — table row
+        └── <th>  — footer cell
+```
+
+---
+
+## Element reference
+
+| Element | Name | Purpose |
+|---|---|---|
+| `<table>` | Table | Container for the entire table |
+| `<thead>` | Table head | Groups the header rows |
+| `<tbody>` | Table body | Groups the main data rows |
+| `<tfoot>` | Table foot | Groups the footer rows (meta info, totals) |
+| `<tr>` | Table row | A single row — used inside thead, tbody, tfoot |
+| `<th>` | Table header | A header cell — labels a row or column |
+| `<td>` | Table data | A data cell — contains the actual data |
+
+---
+
+## Minimal table example
+
+```html
+<table>
+  <thead>
+    <tr>
+      <th>Title of this table</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>First Row</th>
+      <td>First Data Cell</td>
+    </tr>
+    <tr>
+      <th>Second Row</th>
+      <td>Second Data Cell</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Footer — publication date, author credits, or other meta info.</th>
+    </tr>
+  </tfoot>
+</table>
+```
+
+---
+
+## Real-world example — Bureau of Labor Statistics
+
+```html
+<table id="quickfacts">
+  <thead>
+    <tr>
+      <th colspan="2">Quick Facts: Software Developers</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2023 Median Pay</th>
+      <td>$130,160 per year<br />$62.58 per hour</td>
+    </tr>
+    <tr>
+      <th>Typical Entry-Level Education</th>
+      <td>Bachelor's degree</td>
+    </tr>
+    <tr>
+      <th>Job Outlook, 2022-32</th>
+      <td>25% (Much faster than average)</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>Source: U.S. Bureau of Labor Statistics</th>
+    </tr>
+  </tfoot>
+</table>
+```
+
+> `colspan="2"` spans a cell across 2 columns.
+
+---
+
+## Tables — do and don't
+
+| ✅ Use tables for | ⚠️ Do not use tables for |
+|---|---|
+| Statistical data | Page layout |
+| Schedules and timetables | Positioning non-data elements |
+| Pricing or comparison grids | Navigation menus |
+| Structured key-value data | General content arrangement |
+
+> For layout, use **CSS Flexbox** or **CSS Grid** instead.
+
+
+# HTML Validators
+
+## Why validation matters
+
+- HTML is **forgiving** — browsers try to render code even with errors
+- A missing closing tag may still render, but can cause **unexpected behaviour**
+
+### Example of a silent error
+
+```html
+<!-- missing closing </h2> tag -->
+<h2>Subheading 3
+<p>This paragraph renders as an h2 — not the intended result.</p>
+```
+
+> The browser's parsing algorithm fills in the gap, but not always the way you intended.
+
+---
+
+## What is an HTML validator
+
+- A tool that checks your HTML against **official HTML specifications**
+- Identifies **errors and warnings** in your code
+- Ensures your pages are **correctly structured** and compliant with web standards
+
+---
+
+## Who benefits from validation
+
+- **You** — catch bugs before they cause visual or functional issues
+- **Teammates** — easier to review and understand clean, valid code
+- **Open-source contributors** — consistent, standards-compliant codebase
+
+---
+
+## Recommended validators
+
+### W3C Markup Validation Service
+The most widely accepted HTML validator:
+
+```
+https://validator.w3.org
+```
+
+1. Visit the site
+2. Click **Validate by Direct Input**
+3. Paste your HTML code
+4. Click **Check**
+5. Review the list of errors and warnings
+
+---
+
+### JSON Formatter HTML Validator
+
+```
+https://jsonformatter.org
+```
+
+1. Paste your HTML into the editor
+2. Click **Validate**
+3. Review any errors shown
+
+---
+
+## Common errors validators catch
+
+- Missing closing tags
+- Incorrect nesting of elements
+- Deprecated elements or attributes
+- Missing required attributes (e.g. `alt` on `<img>`)
+- Incorrect document structure (e.g. elements outside `<body>`)
+
+---
+
+## Quick habit
+
+> Always run your HTML through a validator before considering a project complete — it takes seconds and can save hours of debugging.
+
+
+
+
+# DOM Inspector and DevTools for Debugging
+
+## Key concepts
+
+| Term | Definition |
+|---|---|
+| **Bug** | An issue that causes a program to not work as expected |
+| **Debugging** | The process of finding and fixing bugs |
+| **DOM** | Document Object Model — a tree-like structure representing all elements on a page |
+| **DOM Inspector** | Tool to inspect and explore the HTML structure of a page |
+| **DevTools** | Browser tools to inspect and debug HTML, CSS, and JavaScript |
+
+---
+
+## How to open DevTools
+
+| Method | Shortcut |
+|---|---|
+| Right-click on the page | Select **Inspect** |
+| PC keyboard | `Ctrl` + `Shift` + `I` |
+| Mac keyboard | `Cmd` + `Option` + `I` |
+
+---
+
+## Key DevTools tabs
+
+| Tab | Purpose |
+|---|---|
+| **Elements** | Shows the full HTML structure of the page (DOM inspector) |
+| **Console** | Shows errors, warnings, and logs occurring on the page |
+
+---
+
+## Example — debugging a broken link
+
+```html
+<!-- bug: typo in the URL — /larn instead of /learn -->
+<a href="https://www.freecodecamp.org/larn/">freeCodeCamp curriculum</a>
+```
+
+### Debugging steps
+
+1. Click the link → lands on a **404 page** (page not found)
+2. Open DevTools → go to the **Console** tab
+3. Look for the **404 error message** — it shows `/larn` as the failing URL
+4. Go to the **Elements** tab → inspect the `href` attribute
+5. Spot the typo: `/larn` → fix to `/learn`
+
+```html
+<!-- fixed -->
+<a href="https://www.freecodecamp.org/learn/">freeCodeCamp curriculum</a>
+```
+
+---
+
+## What a 404 error means
+
+- The server **cannot find the requested page**
+- Common causes: typo in the URL, moved or deleted page, incorrect path
+
+---
+
+## Quick debugging habit
+
+```
+Something not working as expected?
+  1. Open DevTools (Ctrl/Cmd + Shift + I)
+  2. Check the Console tab for errors
+  3. Check the Elements tab for incorrect HTML
+  4. Fix the issue and verify in the preview
+```
+
+
+
+# HTML Tables and Forms Review
+
+## Form elements and attributes
+
+### `<form>`
+```html
+<form method="POST" action="url-goes-here">
+  <!-- inputs go here -->
+</form>
+```
+
+| Attribute | Purpose |
+|---|---|
+| `action` | URL where form data is sent on submission |
+| `method` | HTTP method — `GET` or `POST` |
+
+---
+
+### `<input>` — input field
+
+| Attribute | Purpose |
+|---|---|
+| `type` | Type of input — `text`, `email`, `number`, `radio`, `checkbox`, etc. |
+| `placeholder` | Hint text shown before the user types |
+| `value` | Pre-set value — also sets button text for `type="button"` |
+| `name` | Key used when form data is submitted — groups radio buttons |
+| `size` | Number of visible characters in the field |
+| `min` / `max` | Minimum/maximum value for number inputs |
+| `minlength` / `maxlength` | Minimum/maximum character count |
+| `required` | Field must be filled before submission |
+| `disabled` | Field cannot be interacted with |
+| `readonly` | Field is visible and focusable but not editable |
+
+```html
+<!-- text input -->
+<input type="text" id="name" name="name" placeholder="e.g. Quincy Larson"
+  size="20" minlength="5" maxlength="30" required />
+
+<!-- number input -->
+<input type="number" id="quantity" name="quantity" min="2" max="10" disabled />
+
+<!-- button via input -->
+<input type="button" value="Show Alert" />
+```
+
+---
+
+### `<label>` — input label
+
+| Association | How |
+|---|---|
+| Implicit | Nest `<input>` inside `<label>` |
+| Explicit | Match `for` on `<label>` with `id` on `<input>` |
+
+```html
+<!-- implicit -->
+<label>
+  Full Name:
+  <input type="text" />
+</label>
+
+<!-- explicit -->
+<label for="email">Email Address:</label>
+<input type="email" id="email" />
+```
+
+---
+
+### `<button>` — clickable button
+
+```html
+<button type="button">Show Form</button>   <!-- no default action -->
+<button type="submit">Submit Form</button> <!-- submits the form -->
+<button type="reset">Reset Form</button>   <!-- clears all inputs -->
+```
+
+---
+
+### `<fieldset>` and `<legend>` — grouping inputs
+
+```html
+<!-- radio group -->
+<fieldset>
+  <legend>Was this your first time at our hotel?</legend>
+  <label for="yes-option">Yes</label>
+  <input id="yes-option" type="radio" name="hotel-stay" value="yes" />
+  <label for="no-option">No</label>
+  <input id="no-option" type="radio" name="hotel-stay" value="no" />
+</fieldset>
+
+<!-- checkbox group -->
+<fieldset>
+  <legend>Why did you choose to stay at our hotel?</legend>
+  <label for="location">Location</label>
+  <input type="checkbox" id="location" name="location" value="location" />
+  <label for="price">Price</label>
+  <input type="checkbox" id="price" name="price" value="price" />
+</fieldset>
+```
+
+| Element | Purpose |
+|---|---|
+| `<fieldset>` | Groups related inputs together |
+| `<legend>` | Caption describing the group |
+
+---
+
+## Form states
+
+| State | Triggered by | Can focus | Can edit |
+|---|---|---|---|
+| Default | Page load | Yes | Yes |
+| Focused | Click or `Tab` key | Yes | Yes |
+| Disabled | `disabled` attribute | No | No |
+| Readonly | `readonly` attribute | Yes | No |
+
+---
+
+## Table elements and attributes
+
+### Element reference
+
+| Element | Purpose |
+|---|---|
+| `<table>` | Container for the entire table |
+| `<caption>` | Title shown above the table |
+| `<thead>` | Groups header rows |
+| `<tbody>` | Groups body/data rows |
+| `<tfoot>` | Groups footer rows |
+| `<tr>` | A single table row |
+| `<th>` | Header cell — labels a row or column |
+| `<td>` | Data cell — contains the actual data |
+
+### `colspan` attribute
+Spans a cell across multiple columns:
+
+```html
+<td colspan="2">Average Grade</td>
+```
+
+### Full table example
+
+```html
+<table>
+  <caption>Exam Grades</caption>
+  <thead>
+    <tr>
+      <th>Last Name</th>
+      <th>First Name</th>
+      <th>Grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Davis</td>
+      <td>Alex</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <td>Doe</td>
+      <td>Samantha</td>
+      <td>92</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2">Average Grade</td>
+      <td>78</td>
+    </tr>
+  </tfoot>
+</table>
+```
+
+---
+
+## HTML tools
+
+| Tool | Purpose |
+|---|---|
+| **HTML validator** | Checks HTML syntax against official standards — catches errors and warnings |
+| **DOM inspector** | Inspect and explore the HTML structure of a live page |
+| **DevTools** | Full browser toolkit — debug HTML, CSS, JavaScript, network requests, and more |
+
+### Opening DevTools
+
+| Method | Shortcut |
+|---|---|
+| Right-click page | Select **Inspect** |
+| PC | `Ctrl` + `Shift` + `I` |
+| Mac | `Cmd` + `Option` + `I` |
+
+### Key DevTools tabs
+
+| Tab | Purpose |
+|---|---|
+| **Elements** | View and edit the HTML/CSS of the page |
+| **Console** | See errors, warnings, and logs |
+
+
+
+# What Is Accessibility?
+
+## Definition
+
+Creating products and services that **everyone can use** — including people with disabilities.
+
+In web development: making websites that everyone can **understand and interact with**.
+
+---
+
+## Disabilities that can affect online experience
+
+- **Visual** — blindness, low vision, colour blindness
+- **Auditory** — deafness
+- **Motor** — difficulty using keyboards, mice, or touchscreens
+- **Cognitive** — attention disorders, memory issues
+- **Communication** — difficulty speaking or understanding spoken language
+- **Neurological** — sensitivity to flashing lights
+
+---
+
+## WCAG — Web Content Accessibility Guidelines
+
+Developed by the **World Wide Web Consortium (W3C)** — an international set of standards for accessible web content.
+
+Built on four core principles: **POUR**
+
+| Letter | Principle | What it means | Example |
+|---|---|---|---|
+| **P** | Perceivable | Users can perceive all information | Provide `alt` text for images |
+| **O** | Operable | Users can interact with the interface | All functionality works with keyboard, not just mouse |
+| **U** | Understandable | Users can understand the content | Use simple language, avoid complex sentences |
+| **R** | Robust | Works across browsers and assistive technologies | Use semantic HTML |
+
+> If your content fails **any one** of these principles, not everyone will be able to use your website.
+
+---
+
+## How to check your accessibility
+
+Visit the W3C Quick Reference for a full list of criteria and techniques:
+
+```
+https://www.w3.org/WAI/WCAG21/quickref/
+```
+
+---
+
+## How semantic HTML helps accessibility
+
+- Screen readers rely on semantic elements to **describe and navigate** content
+- Semantic HTML ensures compatibility with a **wide range of browsers and assistive technologies**
+- Supports the **Robust** principle of WCAG
+
+---
+
+## Why accessibility matters
+
+- Promotes **equality** — ensures everyone can access and engage with your content
+- Creates a **better user experience** for all users
+- Is an **essential** part of professional web development
+
+
+# Screen Readers
+
+## What is a screen reader
+
+- Assistive technology programs that help **blind and visually impaired** people use computers and mobile devices
+- Also used by people with **dyslexia** and **cognitive disabilities**
+
+---
+
+## What screen readers do
+
+> Common misconception: screen readers are just text-to-speech devices — they are much more.
+
+| Feature | Description |
+|---|---|
+| **Text-to-speech** | Reads on-screen text aloud |
+| **Braille output** | Renders text to a braille display instead of speech |
+| **Navigation aids** | Helps users move through page structure (headings, links, landmarks) |
+| **Web browsing assistance** | Interprets HTML structure to describe page content |
+
+---
+
+## Why screen readers matter
+
+- Enable access to **education, work, and social media**
+- Ensure **digital inclusion** for people who would otherwise be excluded
+- Allow full participation in society
+
+---
+
+## Screen readers by platform
+
+| Platform | Built-in screen reader | How to enable | Other options |
+|---|---|---|---|
+| **macOS** | VoiceOver | `Cmd` + `F5` | — |
+| **iOS** | VoiceOver | Settings → Accessibility | — |
+| **Windows** | Narrator | `Win` + `Ctrl` + `Enter` | NVDA (free, open-source), JAWS (paid) |
+| **Linux** | Orca (desktop) | — | Speakup (terminal) |
+| **Android** | TalkBack | Settings → Special Function → Accessibility → TalkBack | Ella, Select to Speak |
+
+---
+
+## The developer's responsibility
+
+- Many developers do **not design with screen reader accessibility in mind** — a major challenge for users
+- Every developer should learn how to make their web software **accessible for all users**
+- Good accessibility demonstrates **empathy and a commitment to inclusivity**
+
+---
+
+## How to support screen readers in HTML
+
+- Use **semantic HTML** — screen readers rely on element meaning to navigate content
+- Always include `alt` text on images
+- Use proper **heading hierarchy** (`h1` → `h2` → `h3`)
+- Associate `<label>` with every `<input>`
+- Ensure all functionality works with **keyboard navigation**
+
+
+
+
+# Large Text and Braille Keyboards
+
+## Who uses them
+
+People with **visual disabilities** — from low vision to complete blindness.
+
+---
+
+## Large Text Keyboards (Large Print Keyboards)
+
+Designed for users with **low vision** who can still see but struggle with standard key sizes:
+
+| Feature | Purpose |
+|---|---|
+| Larger letters, numbers, and symbols | Easier to see individual keys |
+| Enhanced contrast | Improves visibility (e.g. yellow keys with black text) |
+| Backlit keys | Adjustable brightness for different lighting conditions |
+
+### Common examples
+
+- **Yellow keys with black bold text** — high contrast for low vision users
+- **Black keys with white text + backlit** — adjustable for different environments
+
+---
+
+## Braille Keyboards
+
+Designed for users with **more severe visual disabilities**, including people who are blind.
+
+### What is Braille
+
+- A **tactile reading and writing system**
+- Uses **raised dots** arranged in specific patterns to represent letters, numbers, and punctuation
+- Read by feeling the patterns with fingertips
+
+### How braille keyboards work
+
+- Keys have **raised dot patterns** representing letters, numbers, and symbols
+- Users identify keys by **touch** rather than sight
+- Provides a completely **tactile experience**
+
+---
+
+## Combined keyboards
+
+Some keyboards combine **both approaches** — large print fonts and braille dot patterns:
+
+- Useful for people with visual disabilities who are **also learning braille**
+- Serves a wider range of visual impairment levels
+
+---
+
+## Summary
+
+| Keyboard type | Best for | Key feature |
+|---|---|---|
+| Large print | Low vision | Larger text, high contrast, backlit |
+| Braille | Blind / severe visual impairment | Raised dot patterns on keys |
+| Combined | Both / braille learners | Large text + braille dots |
+
+---
+
+## Why this matters for developers
+
+- Accessible websites must work well with **alternative input methods**
+- Ensure your UI is navigable by **keyboard alone** — not just mouse
+- Clear, readable text and good colour contrast supports users of large print keyboards
+
+
+# Alternative Pointing Devices
+
+## What are they
+
+Input devices that serve as alternatives to the traditional mouse — essential for improving **computer accessibility** for people with disabilities, forelimb impairments, and limited mobility.
+
+---
+
+## Trackball
+
+A **stationary pointing device** with a large movable ball in a socket. The user moves the ball with their fingers, thumb, or palm to control the cursor — the device itself stays in place.
+
+| Feature | Benefit |
+|---|---|
+| No surface movement required | Ideal for users with **mobility issues** |
+| High precision control | Good for detailed work |
+| Small footprint | Ideal for **limited desk space** |
+
+> Some traditional mice have a trackball on the top or side — a good starting point for gradually switching.
+
+---
+
+## Joystick
+
+A **lever-based pointing device** that pivots up, down, left, and right — primarily designed for games and industrial applications (machinery, cranes, flight simulators).
+
+| Feature | Benefit |
+|---|---|
+| Large, deliberate movements | Beneficial for users with **tremors or unsteady hands** |
+| Reduces repetitive motion | Ideal for users with **arthritis or carpal tunnel syndrome** |
+| Precise directional control | Great for flight simulators, driving games, industrial machinery |
+
+---
+
+## Touchpad
+
+A **flat, touch-sensitive surface** built into laptops and some keyboards. Users slide fingers across the surface to control the cursor.
+
+| Feature | Benefit |
+|---|---|
+| Forelimb stays almost stationary | Ideal for users with **low arm or hand movement** |
+| No arm movement needed | Suitable for **arthritis and joint pain** |
+| Multi-touch gesture support | Pinch-to-zoom, two-finger scroll, tap-to-click, three-finger swipe |
+| Built-in click buttons | Emulates right-click and left-click of a traditional mouse |
+
+---
+
+## Comparison
+
+| Device | Movement style | Best for |
+|---|---|---|
+| **Trackball** | Finger/thumb rolls the ball | Mobility issues, limited desk space, high precision |
+| **Joystick** | Lever pushed in a direction | Tremors, arthritis, directional control applications |
+| **Touchpad** | Finger slides across surface | Low arm mobility, arthritis, general laptop use |
+
+---
+
+## Why this matters for developers
+
+- Ensure all interactive elements are **reachable and usable without a mouse**
+- Support **keyboard navigation** as a baseline
+- Avoid interactions that require precise mouse movements — these can be difficult for alternative device users
+- Test your UI with different input methods where possible
+
+
+
+# Screen Magnifiers
+
+## What are they
+
+Tools that **enlarge text, graphics, and other elements** on a screen to help people with **low vision and visual impairments** access digital content.
+
+- Most allow enlargement of **200% or more**
+- Offer **customisable zoom percentages** and other settings
+- Users navigate the magnified view with a **pointing device or keyboard**
+
+---
+
+## What screen magnifiers help with
+
+| Use case | How magnifiers help |
+|---|---|
+| **Reading text** | Enlarges small fonts in documents, emails, and articles |
+| **Web browsing** | Makes buttons, links, and interactive elements easier to locate and click |
+| **Filling out forms** | Improves visibility of fields and labels |
+| **General online activity** | Enables full participation without eye strain |
+
+---
+
+## Developer considerations for magnifier users
+
+- Use **scalable fonts** so the page can be resized without breaking the layout
+- Implement **responsive design** so the UI adapts to different screen sizes
+- Use **high-contrast colour schemes** and allow customisable colours
+- Keep the **navbar non-sticky and minimal** so it doesn't block content when magnified
+- Use **real HTML text** instead of images of text
+- Place **feedback and error messages directly next to** the element that triggered them
+
+---
+
+## Built-in magnifiers by platform
+
+| Platform | Magnifier | How to enable |
+|---|---|---|
+| **macOS** | Zoom | Settings → Accessibility → Zoom → toggle keyboard shortcuts |
+| **iOS** | Zoom | Settings → Accessibility → Zoom |
+| **Android** | Magnification | Settings → Special Function → Accessibility → Magnification |
+| **Windows** | Magnifier | Settings → Ease of Access → Magnifier |
+| **Linux** | Zoom or Magnifier | Varies by distribution |
+
+---
+
+## Third-party screen magnifiers
+
+| Tool | Platform |
+|---|---|
+| ZoomText | Windows |
+| ClaroView | macOS, Windows |
+| iZoom | Windows |
+| Zoomify | macOS |
+| LunarPlus | Windows |
+| Loupe | macOS |
+
+---
+
+## Why this matters for developers
+
+Screen magnifiers are widely used — designing with scalability, contrast, and responsive layout in mind ensures your content is accessible to users who depend on them.
+
+
+# Voice Recognition Software
+
+## What is it
+
+Software that lets users **control computers and devices using their voice** instead of traditional input devices like keyboards and mice.
+
+### What you can do with it
+
+- Write emails and documents
+- Browse the web
+- Control smart home devices
+- Issue commands to the operating system
+
+---
+
+## Who uses it
+
+### People with disabilities
+
+| Group | Condition |
+|---|---|
+| Visual impairments | Low vision, blindness |
+| Mobility impairments | Limited use of hands/arms, arthritis, carpal tunnel syndrome |
+| Injury recovery | Hand or arm injuries |
+| Cognitive disorders | Memory issues, attention deficit disorders |
+| Elderly users | Find voice commands easier than physical input |
+
+### Other users (no disability)
+
+- Law enforcement
+- Gamers
+- Drivers
+- Busy professionals
+
+---
+
+## Why voice recognition matters for accessibility
+
+- **Eliminates the need for physical interaction** with a device
+- Gives people with disabilities **significant independence and control** over their environment
+- Enables full participation in digital life — work, communication, browsing
+
+---
+
+## Voice recognition software by platform
+
+| Platform | Built-in tool |
+|---|---|
+| **macOS / iOS** | Voice Control |
+| **Android** | Voice Access |
+| **Windows** | Windows Speech Recognition (called Voice Access in recent versions) |
+
+### Third-party options
+
+| Tool | Platform |
+|---|---|
+| **Dragon by Nuance** | Windows — one of the most popular professional tools |
+
+---
+
+## Why this matters for developers
+
+- Ensure your web content is **navigable and operable by voice commands**
+- Use **semantic HTML** and proper labels so voice tools can identify and interact with elements correctly
+- Avoid interactions that require precise clicking — voice users often navigate by **element names and labels**
+
+
+# Accessibility Auditing Tools
+
+## What are they
+
+Applications that **automatically detect accessibility issues** in websites, web apps, and mobile apps — helping developers meet accessibility standards.
+
+> ⚠️ Automated tools typically find only about **one third** of all possible accessibility issues. Manual testing — preferably by people with disabilities — is always required.
+
+---
+
+## Google Lighthouse
+
+A popular web metrics checker built into **Chrome DevTools** or available online.
+
+### What it checks
+- Accessibility
+- SEO
+- Best practices
+- Performance
+
+### How to use (DevTools version)
+1. Open DevTools — press `F12`
+2. Switch to the **Lighthouse** tab
+3. Select the metrics to check
+4. Choose the target device
+5. Click **Analyse page load**
+6. Review the accessibility score and list of issues
+
+### Web version
+```
+https://pagespeed.web.dev
+```
+> More reliable metrics, but does **not support local websites**.
+
+---
+
+## WAVE
+
+A reliable accessibility checker available as a **Chrome extension** or **web tool**.
+
+### How to use
+1. Enter the URL of your website
+2. A comprehensive report is generated automatically
+
+### What it reports
+- Accessibility features implemented
+- ARIA usage
+- Colour contrast issues
+
+---
+
+## IBM Equal Accessibility Checker
+
+A robust tool for scanning websites and generating **detailed accessibility reports**.
+
+Available as a **Chrome extension** or **Firefox add-on**.
+
+### How to use (Chrome extension)
+1. Download from the Chrome Web Store
+2. Open DevTools — press `F12`
+3. Go to the **Accessibility Checker** tab in the Elements panel
+4. Click **Scan**
+5. Review the generated report
+6. Export as spreadsheet or HTML via **Export XLS**
+
+---
+
+## Tool comparison
+
+| Tool | Available as | Supports local sites | Export report |
+|---|---|---|---|
+| Google Lighthouse | DevTools tab, web | Yes (DevTools only) | No |
+| WAVE | Chrome extension, web | No | No |
+| IBM Equal Accessibility Checker | Chrome extension, Firefox add-on | Yes | Yes (XLS, HTML) |
+
+---
+
+## Key reminder
+
+> A **perfect score** from any automated tool does **not** mean your content is fully accessible. Always complement automated testing with **manual testing by real users**, including people with disabilities.
+
+
+
+# Heading Structure and Accessibility
+
+## Why heading structure matters
+
+- Creates a **visual hierarchy** for all users to navigate and understand a page
+- Allows **screen reader users** to list all headings and jump directly to sections they need
+- Reduces **cognitive load** for users with partial sight or cognitive disabilities
+- Helps everyone find information quickly
+- Well-formed headings can also improve **SEO**
+
+---
+
+## How screen readers use headings
+
+Screen readers can **list all headings on a page** — users jump directly to the section they need without reading through all content. This makes correct heading order critical.
+
+```html
+<h1>I am an h1 heading</h1>
+<h2>I am an h2 heading</h2>
+<h3>I am an h3 heading</h3>
+<h4>I am an h4 heading</h4>
+<h5>I am an h5 heading</h5>
+<h6>I am an h6 heading</h6>
+```
+
+---
+
+## Best practices
+
+- Use headings in a **logical hierarchy** — `h1` → `h2` → `h3`, and so on
+- **Never skip levels** — don't jump from `h1` to `h3` or `h2` to `h4`
+- Use **clear and descriptive text** that summarises the content that follows
+- **Never use a heading in isolation** — content must follow every heading
+- Use **actual heading elements** — don't style regular text to look like a heading
+- Each page should have **one `h1`** representing the main topic or title
+
+---
+
+## Correct structure example
+
+```html
+<!-- page title -->
+<h1>What is HTML</h1>
+
+<!-- first section -->
+<section>
+  <h2>Introduction to HTML</h2>
+  <p>HTML stands for HyperText Markup Language. It is the standard language for creating web pages.</p>
+</section>
+
+<!-- second section -->
+<section>
+  <h2>History of HTML</h2>
+  <p>HTML began to take shape in the early 90s.</p>
+
+  <h3>Origins</h3>
+  <p>HTML was created by Tim Berners-Lee in 1991.</p>
+</section>
+```
+
+---
+
+## Common mistakes to avoid
+
+| ❌ Incorrect | ✅ Correct |
+|---|---|
+| Skipping from `h1` to `h3` | Always use `h2` between `h1` and `h3` |
+| Multiple `h1` elements on one page | One `h1` per page only |
+| Vague heading text like "Section 1" | Descriptive text like "History of HTML" |
+| Using bold/large text instead of headings | Use actual `<h2>`, `<h3>` elements |
+| Heading with no content below it | Always follow a heading with content |
+
+
+
